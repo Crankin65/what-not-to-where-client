@@ -1,0 +1,24 @@
+async function weatherCheckOpenMeteo(latitude,longitude) {
+	if (latitude && longitude) {
+
+		const response = await fetch(`http://localhost:8000/openmeteo/${latitude}/${longitude}`, {
+			method: 'GET'
+		});
+		let formattedData = await response.json();
+		// console.log(await formattedData)
+		return await formattedData;
+
+	} else {
+
+		const response = await fetch(`http://localhost:8000/openmeteo/29.76328/-95.36327`, {
+			method: 'GET'
+		});
+		let formattedData = await response.json();
+		// console.log(await formattedData)
+		return await formattedData;
+
+	}
+
+}
+
+export default weatherCheckOpenMeteo;

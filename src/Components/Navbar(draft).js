@@ -2,6 +2,7 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon} from "@/Icons/Tailwind Icons";
+import React, {useState} from "react";
 
 const navigation = [
 	{ id:0, name: 'Dashboard', href: '#', current: true },
@@ -15,6 +16,18 @@ function classNames(...classes) {
 }
 
 export default function Navbar2() {
+	const [searchInput, setSearchInput] = useState("");
+
+	const handleChange = (value) => {
+		setSearchInput(value)
+	}
+
+	const onSubmit = (e) => {
+		e.preventDefault()
+		let cityName = e.target.city.value
+		props.updateCitySelection(cityName)
+	}
+
 	return (
 		<nav as='nav' className='bg-gray-800'>
 			<div className=' flex  mx-auto px-2 justify-around sm:px-6 lg:px-8'>
@@ -28,6 +41,17 @@ export default function Navbar2() {
 								<li className='flex text-white font-normal text-sm' key={item.id}> {item.name} </li>
 						))}
 						<li>test</li>
+
+						<form method='get' onSubmit={onSubmit}>
+							<input
+								placeholder='city search'
+								value = {searchInput}
+								name='city'
+								onChange={(e) => handleChange(e.target.value)}
+							/>
+							<input type='submit' value='Submit' />
+						</form>
+
 					</ul>
 				</div>
 
@@ -35,5 +59,6 @@ export default function Navbar2() {
 		</nav>
 	)
 }
+
 
 
