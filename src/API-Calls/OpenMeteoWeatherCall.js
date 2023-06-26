@@ -10,13 +10,13 @@ async function weatherCheckOpenMeteo(latitude,longitude) {
 
 	} else {
 
-		const response = await fetch(`http://localhost:8000/openmeteo/29.76328/-95.36327`, {
-			method: 'GET'
-		});
-		let formattedData = await response.json();
-		// console.log(await formattedData)
-		return await formattedData;
-
+		// const response = await fetch(`http://localhost:8000/openmeteo/29.76328/-95.36327`, {
+		// 	method: 'GET'
+		// });
+		// let formattedData = await response.json();
+		// // console.log(await formattedData)
+		// return await formattedData;
+			return 'Failed Check'
 	}
 
 }

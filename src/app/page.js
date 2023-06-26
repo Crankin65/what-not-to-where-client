@@ -28,6 +28,7 @@ export default function Home() {
     setCitySelection(city)
   }
 
+  //OpenMeteo
   useEffect(() => {
     setopenMeteoDataState('loading');
     getCoordinates(citySelection)
@@ -47,6 +48,7 @@ export default function Home() {
       })
   },[citySelection]);
 
+  //OpenWeatherMap
   useEffect(() => {
     setOpenWeatherState('loading');
     getCoordinates(citySelection)
@@ -69,6 +71,7 @@ export default function Home() {
       })
   },[citySelection]);
 
+  //WeatherAPI
   useEffect(() => {
     setWeatherAPIState('loading');
     weatherAPICheck(citySelection)
@@ -89,13 +92,17 @@ export default function Home() {
     <>
       <nav className='mx-0  px-0 sm:px-6 lg:px-8'>
         <Navbar />
-        <Navbar2 />
+        <Navbar2
+          updateCitySelection = {updateCitySelection}
+
+        />
       </nav>
 
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
 
         <WeatherSection
           source = "Open Meteo Weather"
+          currentTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.currentForecast.currentTemp}
           // highTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_max[0]}
           // lowTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_min[0]}
         />

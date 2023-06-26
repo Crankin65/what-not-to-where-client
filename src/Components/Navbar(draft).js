@@ -15,7 +15,7 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar2() {
+export default function Navbar2(props) {
 	const [searchInput, setSearchInput] = useState("");
 
 	const handleChange = (value) => {
@@ -42,14 +42,14 @@ export default function Navbar2() {
 						))}
 						<li>test</li>
 
-						<form method='get' onSubmit={onSubmit}>
+						<form method='get' onsubmit='onSubmit()'>
 							<input
 								placeholder='city search'
 								value = {searchInput}
 								name='city'
 								onChange={(e) => handleChange(e.target.value)}
 							/>
-							<input type='submit' value='Submit' />
+							<button className='text-white hover:bg-gray-600 rounded px-1' type="submit">Submit</button>
 						</form>
 
 					</ul>
