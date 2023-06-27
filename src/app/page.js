@@ -10,6 +10,7 @@ import weatherCheckOpenWeather from "../API-Calls/OpenWeatherMapCall";
 import weatherAPICheck from "../API-Calls/WeatherAPICall";
 
 import getCoordinates from "../API-Calls/getCoordinates";
+import DetailedTable from "@/Components/DetailedTable";
 
 export default function Home() {
   const [openMeteoDataState, setopenMeteoDataState] = useState('loading');
@@ -86,7 +87,37 @@ export default function Home() {
       })
   },[citySelection]);
 
-
+  const dummyWeatherObject = [{
+    year: 2023,
+    month: 6,
+    date: 27,
+    hour: 0,
+    maxTemp: 90,
+    minTemp: 72,
+    humidity: 40,
+    aqi: 10,
+    weather: "cloudy"
+  }, {
+      year: 2023,
+      month: 6,
+      date: 27,
+      hour: 1,
+      maxTemp: 94,
+      minTemp: 70,
+      humidity: 43,
+      aqi: 12,
+      weather: "sunny"
+    },{
+    year: 2023,
+    month: 6,
+    date: 27,
+    hour: 2,
+    maxTemp: 99,
+    minTemp: 74,
+    humidity: 50,
+    aqi: 19,
+    weather: "sunny"
+  }]
 
   return (
     <>
@@ -103,10 +134,15 @@ export default function Home() {
         <WeatherSection
           source = "Open Meteo Weather"
           currentTemp = {openMeteoDataState === 'loading' ? 'loading' : 'XX°'}
+          weather = {dummyWeatherObject}
 
           // currentTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.currentForecast.currentTemp}
           // highTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_max[0]}
           // lowTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_min[0]}
+        />
+
+        <DetailedTable
+          weather = {dummyWeatherObject}
         />
 
         <WeatherSection

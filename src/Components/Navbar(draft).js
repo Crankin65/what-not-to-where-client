@@ -33,10 +33,10 @@ export default function Navbar2(props) {
 	return (
 		<nav as='nav' className='bg-gray-800 w-full mx-0 px-0'>
 			<div className='flex flex-row justify-between px-2 py-3'>
+
 				<div className='flex justify-start md:hidden'>
 					<Bars3Icon />
 				</div>
-
 
 				{/*<div className='md:flex justify-start px-4  sm:hidden flex '>*/}
 				{/*	<SunIcon />*/}
@@ -49,7 +49,6 @@ export default function Navbar2(props) {
 						))}
 					</ul>
 				</div>
-
 
 				<div className='flex justify-end'>
 					<form className= 'flex' method='get' onSubmit='onSubmit()'>

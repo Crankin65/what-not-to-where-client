@@ -2,12 +2,50 @@ import React from 'react';
 
 export default function WeatherSection(props){
 
+function openDetailedView() {
+console.log('test opendetailedview')
+	return(
+		<table class='table-auto flex hidden'>
+			<thead>
+				<tr>
+					{Object.keys(props.weather[0]).map((title) => {
+							return <th key={title}>{title}</th>
+					})}
+
+					{/*{for (let i = 0; i < props.weather.length; i++){*/}
+					{/*	props.weather[i].map((item) => {*/}
+					{/*		return (*/}
+					{/*			<tr>Object.keys*/}
+					{/*	)*/}
+					{/*}*/}
+					{/*})}*/}
+				</tr>
+			</thead>
+
+			<tbody>
+			<tr>
+				<td></td>
+			</tr>
+			</tbody>
+		</table>
+	)
+}
+
+
 	return (
-		<div className='bg-gray-800 rounded flex flex-row justify-between '>
+		<div className='bg-gray-800 rounded flex flex-row justify-between px-2 py-2 '>
 
 			<div className='flex flex-col justify-evenly rounded gap-8'>
-				<p className='flex bg-green-800 rounded opacity-30'>{props.source}  </p>
-				<p className='flex font-light'>Detail View  </p>
+				<div className='flex flex-row'>
+					<p className='flex bg-green-800 rounded opacity-30'>{props.source}  </p>
+					<p className='flex font-light text-xs px-2'> Latitude: XX.XXX</p>
+					<p className='flex font-light text-xs px-2'> Longitude: XX.XXX</p>
+				</div>
+				<div className='flex flex-row'>
+					<button className='flex flex-row bg-blue-600 rounded px-1 hover:opacity-80 hover:bg-blue-700
+					focus:bg-blue-700 action:bg-blue-900 font-light transition-colors duration-200'
+					onClick = {openDetailedView}>Detailed View</button>
+				</div>
 			{/*<ul className='flex-row'>*/}
 			{/*	<li className='text-white flex font-normal px-2 justify-start '>Source: {props.source}  </li>*/}
 			{/*</ul>*/}
