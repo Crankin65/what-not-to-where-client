@@ -98,11 +98,11 @@ export default function Home() {
         />
       </nav>
 
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <main className="flex flex-col gap-8 py-8">
 
         <WeatherSection
           source = "Open Meteo Weather"
-          currentTemp = {openMeteoDataState === 'loading' ? 'loading' : 'loaded'}
+          currentTemp = {openMeteoDataState === 'loading' ? 'loading' : 'XX°'}
 
           // currentTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.currentForecast.currentTemp}
           // highTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_max[0]}
@@ -111,7 +111,7 @@ export default function Home() {
 
         <WeatherSection
           source = "Open Weather Map"
-          currentTemp = {openWeatherState === 'loading' ? 'loading' : 'loaded'}
+          currentTemp = {openWeatherState === 'loading' ? 'loading' : 'XX°'}
 
           // highTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMap.weather.maxTemp}
           // lowTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMap.weather.minTemp}
@@ -120,7 +120,7 @@ export default function Home() {
         <WeatherSection
           source = "Weather API"
 
-          currentTemp = {weatherAPIState === 'loading' ? 'loading' : 'loaded'}
+          currentTemp = {weatherAPIState === 'loading' ? 'loading' : 'XX°'}
 
           // highTemp = {weatherAPIState === 'loading' ? 'loading' : weatherAPI.weather.maxTemp}
           // lowTemp = {weatherAPIState === 'loading' ? 'loading' : weatherAPI.weather.minTemp}
