@@ -102,19 +102,26 @@ export default function Home() {
 
         <WeatherSection
           source = "Open Meteo Weather"
-          currentTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.currentForecast.currentTemp}
+          currentTemp = {openMeteoDataState === 'loading' ? 'loading' : 'loaded'}
+
+          // currentTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.currentForecast.currentTemp}
           // highTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_max[0]}
           // lowTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_min[0]}
         />
 
         <WeatherSection
           source = "Open Weather Map"
+          currentTemp = {openWeatherState === 'loading' ? 'loading' : 'loaded'}
+
           // highTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMap.weather.maxTemp}
           // lowTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMap.weather.minTemp}
         />
 
         <WeatherSection
           source = "Weather API"
+
+          currentTemp = {weatherAPIState === 'loading' ? 'loading' : 'loaded'}
+
           // highTemp = {weatherAPIState === 'loading' ? 'loading' : weatherAPI.weather.maxTemp}
           // lowTemp = {weatherAPIState === 'loading' ? 'loading' : weatherAPI.weather.minTemp}
         />
