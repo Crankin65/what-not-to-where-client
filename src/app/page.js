@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from 'react'
-import Image from 'next/image'
 import Navbar from "../Components/Navbar";
 import Navbar2 from "../Components/Navbar(draft)"
 import WeatherSection from "../Components/WeatherSection";
+import {dummyWeatherObject} from "@/API-Calls/dummyWeatherObject";
 
 import weatherCheckOpenMeteo from "../API-Calls/OpenMeteoWeatherCall";
 import weatherCheckOpenWeather from "../API-Calls/OpenWeatherMapCall";
@@ -112,37 +112,6 @@ export default function Home() {
     }
   }
 
-  const dummyWeatherObject = [{
-    year: 2023,
-    month: 6,
-    date: 27,
-    hour: 0,
-    maxTemp: 90,
-    minTemp: 72,
-    humidity: 40,
-    aqi: 10,
-    weather: "cloudy"
-  }, {
-      year: 2023,
-      month: 6,
-      date: 27,
-      hour: 1,
-      maxTemp: 94,
-      minTemp: 70,
-      humidity: 43,
-      aqi: 12,
-      weather: "sunny"
-    },{
-    year: 2023,
-    month: 6,
-    date: 27,
-    hour: 2,
-    maxTemp: 99,
-    minTemp: 74,
-    humidity: 50,
-    aqi: 19,
-    weather: "sunny"
-  }]
 
   return (
     <>
@@ -170,7 +139,7 @@ export default function Home() {
           <div className='flex'>
 
             <DetailedTable
-              weather = {dummyWeatherObject}
+              weather = {openMeteoData}
               detailedView = {openMeteoDetailedView}
             />
           </div>
@@ -200,8 +169,6 @@ export default function Home() {
         </div>
 
         <div className='flex flex-col justify-center items-center'>
-
-
 
             <WeatherSection
               source = "Weather API"

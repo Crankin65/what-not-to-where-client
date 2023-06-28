@@ -7,8 +7,8 @@ export default function DetailedTable(props){
 
 if (props.detailedView) {
 	return (
-		<div>
-			<table className='border border-separate border-spacing-1 border-slate-500 bg-gray-900'>
+		<div className='shadow-md overflow-hidden my-8'>
+			<table className=' table-auto w-full border border-separate border-spacing-1 border-slate-500 bg-gray-900'>
 				<thead>
 				<tr>
 					{Object.keys(weatherObject[0]).map((title) => {
@@ -20,7 +20,7 @@ if (props.detailedView) {
 				<tbody>
 				{weatherObject.map((row, index) => {
 					return (
-						<tr key={index}>
+						<tr key={index} className='even:bg-gray-700'>
 
 							{Object.values(row).map((element) => {
 								return(

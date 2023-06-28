@@ -11,7 +11,7 @@ function openDetailedView() {
 		<div className='bg-gray-800 rounded flex flex-row justify-between px-2 py-2 w-5/6 '>
 
 			<div className='flex flex-col justify-evenly rounded gap-8'>
-				<div className='flex flex-row'>
+				<div className='flex flex-row w-5/6 '>
 					<p className='flex bg-green-800 rounded opacity-30'>{props.source}  </p>
 					<p className='flex font-light text-xs px-2'> Latitude: XX.XXX</p>
 					<p className='flex font-light text-xs px-2'> Longitude: XX.XXX</p>
