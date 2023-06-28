@@ -12,15 +12,19 @@ import weatherAPICheck from "../API-Calls/WeatherAPICall";
 import getCoordinates from "../API-Calls/getCoordinates";
 import DetailedTable from "@/Components/DetailedTable";
 
+
 export default function Home() {
   const [openMeteoDataState, setopenMeteoDataState] = useState('loading');
   const [openMeteoData, setOpenMeteoData] = useState({});
+  const [openMeteoDetailedView, setOpenMeteoDetailedView] = useState(false)
 
   const [openWeatherState, setOpenWeatherState] = useState('loading');
   const [openWeatherMap, setOpenWeatherMap] = useState({});
+  const [openWeatherMapDetailedView, setOpenWeatherMapDetailedView] = useState(false)
 
   const [weatherAPIState, setWeatherAPIState] = useState('loading');
   const [weatherAPI, setWeatherAPI] = useState({});
+  const [weatherApiDetailedView, setWeatherApiDetailedView] = useState(false)
 
   const [citySelection, setCitySelection ] = useState('');
   const [coordinates, setCoordinates] = useState([])
@@ -48,6 +52,13 @@ export default function Home() {
         setopenMeteoDataState('error');
       })
   },[citySelection]);
+  function updateOpenMeteoDetailedView(){
+    if (openMeteoDetailedView === true) {
+      setOpenMeteoDetailedView(false)
+    } else {
+      setOpenMeteoDetailedView(true)
+    }
+  }
 
   //OpenWeatherMap
   useEffect(() => {
@@ -71,6 +82,13 @@ export default function Home() {
         setOpenWeatherState('error',err);
       })
   },[citySelection]);
+  function updateOpenWeatherMapDetailedView(){
+    if (openWeatherMapDetailedView === true) {
+      setOpenWeatherMapDetailedView(false)
+    } else {
+      setOpenWeatherMapDetailedView(true)
+    }
+  }
 
   //WeatherAPI
   useEffect(() => {
@@ -86,6 +104,13 @@ export default function Home() {
         setWeatherAPIState('error');
       })
   },[citySelection]);
+  function updateWeatherAPIDetailedView(){
+    if (weatherApiDetailedView === true) {
+      setWeatherApiDetailedView(false)
+    } else {
+      setWeatherApiDetailedView(true)
+    }
+  }
 
   const dummyWeatherObject = [{
     year: 2023,
@@ -131,36 +156,74 @@ export default function Home() {
 
       <main className="flex flex-col gap-8 py-8">
 
-        <WeatherSection
-          source = "Open Meteo Weather"
-          currentTemp = {openMeteoDataState === 'loading' ? 'loading' : 'XX°'}
-          weather = {dummyWeatherObject}
+        <div className='flex flex-col justify-center items-center'>
 
-          // currentTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.currentForecast.currentTemp}
-          // highTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_max[0]}
-          // lowTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_min[0]}
-        />
+          <WeatherSection
+            source = "Open Meteo Weather"
+            currentTemp = {openMeteoDataState === 'loading' ? 'loading' : 'XX°'}
+            detailedViewButton = {updateOpenMeteoDetailedView}
+            // currentTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.currentForecast.currentTemp}
+            // highTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_max[0]}
+            // lowTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_min[0]}
+          />
 
-        <DetailedTable
-          weather = {dummyWeatherObject}
-        />
+          <div className='flex'>
 
-        <WeatherSection
-          source = "Open Weather Map"
-          currentTemp = {openWeatherState === 'loading' ? 'loading' : 'XX°'}
+            <DetailedTable
+              weather = {dummyWeatherObject}
+              detailedView = {openMeteoDetailedView}
+            />
+          </div>
 
-          // highTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMap.weather.maxTemp}
-          // lowTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMap.weather.minTemp}
-        />
+        </div>
 
-        <WeatherSection
-          source = "Weather API"
+        <div className='flex flex-col justify-center items-center'>
 
-          currentTemp = {weatherAPIState === 'loading' ? 'loading' : 'XX°'}
+          <WeatherSection
+            source = "Open Weather Map"
+            currentTemp = {openWeatherState === 'loading' ? 'loading' : 'XX°'}
+            detailedViewButton = {updateOpenWeatherMapDetailedView}
 
-          // highTemp = {weatherAPIState === 'loading' ? 'loading' : weatherAPI.weather.maxTemp}
-          // lowTemp = {weatherAPIState === 'loading' ? 'loading' : weatherAPI.weather.minTemp}
-        />
+            // highTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMap.weather.maxTemp}
+            // lowTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMap.weather.minTemp}
+          />
+
+
+          <div className='flex'>
+
+            <DetailedTable
+              weather = {dummyWeatherObject}
+              detailedView = {openWeatherMapDetailedView}
+            />
+          </div>
+
+        </div>
+
+        <div className='flex flex-col justify-center items-center'>
+
+
+
+            <WeatherSection
+              source = "Weather API"
+              currentTemp = {weatherAPIState === 'loading' ? 'loading' : 'XX°'}
+              detailedViewButton = {updateWeatherAPIDetailedView}
+
+              // highTemp = {weatherAPIState === 'loading' ? 'loading' : weatherAPI.weather.maxTemp}
+              // lowTemp = {weatherAPIState === 'loading' ? 'loading' : weatherAPI.weather.minTemp}
+            />
+
+
+
+          <div className='flex'>
+
+            <DetailedTable
+              weather = {dummyWeatherObject}
+              detailedView = {weatherApiDetailedView}
+            />
+
+          </div>
+
+        </div>
 
       </main>
     </>

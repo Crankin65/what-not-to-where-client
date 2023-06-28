@@ -3,37 +3,12 @@ import React from 'react';
 export default function WeatherSection(props){
 
 function openDetailedView() {
-console.log('test opendetailedview')
-	return(
-		<table class='table-auto flex hidden'>
-			<thead>
-				<tr>
-					{Object.keys(props.weather[0]).map((title) => {
-							return <th key={title}>{title}</th>
-					})}
-
-					{/*{for (let i = 0; i < props.weather.length; i++){*/}
-					{/*	props.weather[i].map((item) => {*/}
-					{/*		return (*/}
-					{/*			<tr>Object.keys*/}
-					{/*	)*/}
-					{/*}*/}
-					{/*})}*/}
-				</tr>
-			</thead>
-
-			<tbody>
-			<tr>
-				<td></td>
-			</tr>
-			</tbody>
-		</table>
-	)
+	props.detailedViewButton()
 }
 
 
 	return (
-		<div className='bg-gray-800 rounded flex flex-row justify-between px-2 py-2 '>
+		<div className='bg-gray-800 rounded flex flex-row justify-between px-2 py-2 w-5/6 '>
 
 			<div className='flex flex-col justify-evenly rounded gap-8'>
 				<div className='flex flex-row'>
