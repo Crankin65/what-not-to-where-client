@@ -17,6 +17,7 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
+
 export default function Navbar2(props) {
 	const [searchInput, setSearchInput] = useState("");
 
@@ -28,6 +29,19 @@ export default function Navbar2(props) {
 		e.preventDefault()
 		let cityName = e.target.city.value
 		props.updateCitySelection(cityName)
+	}
+
+	function displayCurrentCity(city) {
+		if (city !== ''){
+			let capitalizedCity = city.charAt(0).toUpperCase() + city.slice(1);
+			return(
+				<div className='flex justify-center px-2 mx-2 font-thin'>
+					<p className='flex'>
+					The current city is: {capitalizedCity}
+					</p>
+				</div>
+			)
+		}
 	}
 
 	return (
@@ -50,8 +64,10 @@ export default function Navbar2(props) {
 					</ul>
 				</div>
 
+				{displayCurrentCity(props.currentCity)}
+
 				<div className='flex justify-end'>
-					<form className= 'flex' method='get' onSubmit='onSubmit()'>
+					<form className= 'flex' method='get' onSubmit={onSubmit}>
 						<input
 							className='mx-2 px-2 text-black justify-end items-end'
 							placeholder='city search'

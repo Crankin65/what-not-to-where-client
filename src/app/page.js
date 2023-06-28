@@ -1,15 +1,14 @@
+// noinspection SpellCheckingInspection
+
 "use client";
 import React, { useState, useEffect } from 'react'
 import Navbar from "../Components/Navbar";
-import Navbar2 from "../Components/Navbar(draft)"
+import Navbar2 from "../Components/Navbar2"
 import WeatherSection from "../Components/WeatherSection";
 import {dummyWeatherObject} from "@/API-Calls/dummyWeatherObject";
 
-import weatherCheckOpenMeteo from "../API-Calls/OpenMeteoWeatherCall";
-import weatherCheckOpenWeather from "../API-Calls/OpenWeatherMapCall";
-import weatherAPICheck from "../API-Calls/WeatherAPICall";
+import pingAllWeatherAPIs from "@/API-Calls/pingAllWeatherAPIs";
 
-import getCoordinates from "../API-Calls/getCoordinates";
 import DetailedTable from "@/Components/DetailedTable";
 
 
@@ -19,11 +18,11 @@ export default function Home() {
   const [openMeteoDetailedView, setOpenMeteoDetailedView] = useState(false)
 
   const [openWeatherState, setOpenWeatherState] = useState('loading');
-  const [openWeatherMap, setOpenWeatherMap] = useState({});
+  const [openWeatherMapData, setOpenWeatherMapData] = useState({});
   const [openWeatherMapDetailedView, setOpenWeatherMapDetailedView] = useState(false)
 
   const [weatherAPIState, setWeatherAPIState] = useState('loading');
-  const [weatherAPI, setWeatherAPI] = useState({});
+  const [weatherAPIData, setWeatherAPIData] = useState({});
   const [weatherApiDetailedView, setWeatherApiDetailedView] = useState(false)
 
   const [citySelection, setCitySelection ] = useState('');
@@ -36,21 +35,19 @@ export default function Home() {
   //OpenMeteo
   useEffect(() => {
     setopenMeteoDataState('loading');
-    getCoordinates(citySelection)
-      .then((res) => {
-        weatherCheckOpenMeteo(res)
-          .then((res) => {
-            if (res) {
+    if (citySelection) {
+      pingAllWeatherAPIs(citySelection)
+        .then((res) => {
+            if (res.openMeteoForecast) {
               setopenMeteoDataState('success');
-              setOpenMeteoData(res);
+              console.log(openMeteoData)
+              setOpenMeteoData(res.openMeteoForecast);
             }
           })
-      })
-
       .catch((err) => {
         // console.log('Error:',err);
         setopenMeteoDataState('error');
-      })
+      })}
   },[citySelection]);
   function updateOpenMeteoDetailedView(){
     if (openMeteoDetailedView === true) {
@@ -60,27 +57,55 @@ export default function Home() {
     }
   }
 
+  function returnOpenMeteoCurrentTemp(){
+    if (openMeteoDataS === 'loading') {
+      return 'loading'
+    } else if (!openMeteoData.currentForecast) {
+      return 'Failed Check'
+    } else {
+      return openMeteoData.currentForecast.currentTemp
+    }
+  }
+
   //OpenWeatherMap
+  // useEffect(() => {
+  //   setOpenWeatherState('loading');
+  //   if (citySelection) {
+  //     getCoordinates(citySelection)
+  //       .then((res) => {
+  //         // console.log('after get corodinates')
+  //         // console.log(res)
+  //         weatherCheckOpenWeather(res)
+  //           .then((res)=> {
+  //             // console.log('final res')
+  //             // console.log(res)
+  //             if (res) {
+  //               setOpenWeatherState('success');
+  //               setOpenWeatherMap(res);
+  //             }
+  //           })
+  //       })
+  //       .catch((err) => {
+  //         // console.log('Error:',err);
+  //         setOpenWeatherState('error',err);
+  //     })}
+  // },[citySelection]);
+
   useEffect(() => {
     setOpenWeatherState('loading');
-    getCoordinates(citySelection)
-      .then((res) => {
-        // console.log('after get corodinates')
-        // console.log(res)
-        weatherCheckOpenWeather(res)
-          .then((res)=> {
-            // console.log('final res')
-            // console.log(res)
-            if (res) {
-              setOpenWeatherState('success');
-              setOpenWeatherMap(res);
-            }
-          })
-      })
-      .catch((err) => {
-        // console.log('Error:',err);
-        setOpenWeatherState('error',err);
-      })
+
+    if (citySelection) {
+      pingAllWeatherAPIs(citySelection)
+        .then((res) => {
+          if (res.openWeatherMapForcast) {
+            setOpenWeatherState('success');
+            setOpenWeatherMapData(res.openWeatherMapForcast);
+          }
+        })
+        .catch((err) => {
+          // console.log('Error:',err);
+          setOpenWeatherState('error')
+        })}
   },[citySelection]);
   function updateOpenWeatherMapDetailedView(){
     if (openWeatherMapDetailedView === true) {
@@ -91,18 +116,35 @@ export default function Home() {
   }
 
   //WeatherAPI
+  // useEffect(() => {
+  //   setWeatherAPIState('loading');
+  //   weatherAPICheck(citySelection)
+  //     .then((res) => {
+  //       console.log(res)
+  //       setWeatherAPIState('success');
+  //       setWeatherAPI(res);
+  //     })
+  //     .catch((err) => {
+  //       // console.log('Error:',err);
+  //       setWeatherAPIState('error');
+  //     })
+  // },[citySelection]);
+
   useEffect(() => {
     setWeatherAPIState('loading');
-    weatherAPICheck(citySelection)
-      .then((res) => {
-        console.log(res)
-        setWeatherAPIState('success');
-        setWeatherAPI(res);
-      })
-      .catch((err) => {
-        // console.log('Error:',err);
-        setWeatherAPIState('error');
-      })
+
+    if (citySelection) {
+      pingAllWeatherAPIs(citySelection)
+        .then((res) => {
+          if (res.weatherAPIForecast) {
+            setWeatherAPIState('success');
+            setWeatherAPIData(res.weatherAPIForecast);
+          }
+        })
+        .catch((err) => {
+          // console.log('Error:',err);
+          setWeatherAPIState('error')
+        })}
   },[citySelection]);
   function updateWeatherAPIDetailedView(){
     if (weatherApiDetailedView === true) {
@@ -119,42 +161,46 @@ export default function Home() {
         <Navbar />
         <Navbar2
           updateCitySelection = {updateCitySelection}
+          currentCity = {citySelection}
 
         />
       </nav>
 
       <main className="flex flex-col gap-8 py-8">
 
+        {/* Open Meteo Weather*/}
         <div className='flex flex-col justify-center items-center'>
 
           <WeatherSection
             source = "Open Meteo Weather"
-            currentTemp = {openMeteoDataState === 'loading' ? 'loading' : 'XX°'}
+            // currentTemp = {returnOpenMeteoCurrentTemp}
             detailedViewButton = {updateOpenMeteoDetailedView}
-            // currentTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.currentForecast.currentTemp}
-            // highTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_max[0]}
-            // lowTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.weather.daily.temperature_2m_min[0]}
+            // currentTemp = {openMeteoDataState === 'loading' ? 'loading' : console.log(openMeteoData)}
+            // weather = {openMeteoDataState === 'loading' ? 'loading' : 'loaded'}
+            currentTemp = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.currentForecast.currentTemp}
+            weather = {openMeteoDataState === 'loading' ? 'loading' : openMeteoData.currentForecast.weather}
           />
 
           <div className='flex'>
 
             <DetailedTable
-              weather = {openMeteoData}
+              // weather = {openMeteoData}
+              weather = {openMeteoData.hourlyForecast}
               detailedView = {openMeteoDetailedView}
             />
           </div>
 
         </div>
 
+        {/* OpenWeather Map*/}
         <div className='flex flex-col justify-center items-center'>
 
           <WeatherSection
             source = "Open Weather Map"
-            currentTemp = {openWeatherState === 'loading' ? 'loading' : 'XX°'}
+            currentTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMapData.currentWeather.feels_like}
+            // currentTemp = {openWeatherState === 'loading' ? 'loading' : openMeteoData.currentWeather.feels_like}
             detailedViewButton = {updateOpenWeatherMapDetailedView}
 
-            // highTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMap.weather.maxTemp}
-            // lowTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMap.weather.minTemp}
           />
 
 
@@ -168,11 +214,12 @@ export default function Home() {
 
         </div>
 
+        {/* Weather API*/}
         <div className='flex flex-col justify-center items-center'>
 
             <WeatherSection
               source = "Weather API"
-              currentTemp = {weatherAPIState === 'loading' ? 'loading' : 'XX°'}
+              currentTemp = {weatherAPIState === 'loading' ? 'loading' : weatherAPIData.currentForecast.temperature}
               detailedViewButton = {updateWeatherAPIDetailedView}
 
               // highTemp = {weatherAPIState === 'loading' ? 'loading' : weatherAPI.weather.maxTemp}

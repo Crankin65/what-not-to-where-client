@@ -6,6 +6,20 @@ function openDetailedView() {
 	props.detailedViewButton()
 }
 
+	// function localTime(date) {
+	// 	return date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+	// }
+
+//
+// function displaycurrentWeatherDetails(props) {
+// 	return (
+// 		<div className='flex flex-col items-end content-end rounded font-light '>
+// 			{props.currentTemp ? <p className=''> Current Temperature: {props.currentTemp} </p> : ''}
+// 			<p className=' '>Feels Like Temp: XX°</p>
+// 			<p className=' '>Weather: {props.weather}</p>
+// 		</div>
+// 	)
+// }
 
 	return (
 		<div className='bg-gray-800 rounded flex flex-row justify-between px-2 py-2 w-5/6 '>
@@ -29,7 +43,7 @@ function openDetailedView() {
 			<div className='flex flex-col items-end content-end rounded font-light '>
 				<p className=''>Current Temperature: {props.currentTemp}</p>
 				<p className=' '>Feels Like Temp: XX°</p>
-				<p className=' '>Weather: Sunny</p>
+				<p className=' '>Weather: {props.weather}</p>
 			</div>
 
 		</div>
