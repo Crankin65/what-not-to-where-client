@@ -1,4 +1,5 @@
 import React from 'react';
+import {makeNormalCase} from '@/HelperFunctions/Current Weather Details'
 
 export default function DetailedTable(props){
 
@@ -11,7 +12,7 @@ if (props.detailedView) {
 				<thead>
 				<tr>
 					{Object.keys(weatherObject[0]).map((title) => {
-							return <th className='border border-slate-600 px-2 mx-2 gap-4' key={title}>{title}</th>
+							return <th className='border border-slate-600 px-2 mx-2 gap-4' key={title}>{makeNormalCase(title)}</th>
 						})
 					}
 				</tr>

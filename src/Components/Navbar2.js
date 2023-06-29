@@ -32,13 +32,13 @@ export default function Navbar2(props) {
 	}
 
 	function displayCurrentCity(city) {
-		if (city !== ''){
+		if (city !== '' && props.weatherAPIData){
 			let capitalizedCity = city.charAt(0).toUpperCase() + city.slice(1);
 			return(
-				<div className='flex justify-center px-2 mx-2 font-thin'>
-					<p className='flex'>
-					The current city is: {capitalizedCity}
-					</p>
+				<div className='flex flex-row gap-2 items-center font-light'>
+					<p className='flex'>The current city is: {capitalizedCity}</p>
+					{props.weatherAPIData.currentForecast ? <p className='flex'> The coordinates are: {props.weatherAPIData.currentForecast.latitude} by
+						{props.weatherAPIData.currentForecast.longitude}</p> : ''}
 				</div>
 			)
 		}
