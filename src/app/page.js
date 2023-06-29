@@ -15,6 +15,7 @@ export default function Home() {
   const [openMeteoDataState, setopenMeteoDataState] = useState('loading');
   const [openMeteoData, setOpenMeteoData] = useState({});
   const [openMeteoDetailedView, setOpenMeteoDetailedView] = useState(false)
+  const [openMeteoAirQualityView, setOpenMeteoAirQualityView] = useState(false)
 
   const [openWeatherState, setOpenWeatherState] = useState('loading');
   const [openWeatherMapData, setOpenWeatherMapData] = useState({});
@@ -53,6 +54,13 @@ export default function Home() {
       setOpenMeteoDetailedView(false)
     } else {
       setOpenMeteoDetailedView(true)
+    }
+  }
+  function updateOpenMeteoAirQualityView(){
+    if (openMeteoAirQualityView === true) {
+      setOpenMeteoAirQualityView(false)
+    } else {
+      setOpenMeteoAirQualityView(true)
     }
   }
 
@@ -182,15 +190,24 @@ export default function Home() {
               } : 'loading'
             }
 
-            detailedViewButton = {updateOpenMeteoDetailedView}
+            airQualityButton = {true}
+
+            updateDetailedViewButton = {updateOpenMeteoDetailedView}
+            updateAirQuaityButton = {updateOpenMeteoAirQualityView}
           />
 
           <div className='flex'>
 
             <DetailedTable
               // weather = {openMeteoData}
-              weather = {openMeteoData.hourlyForecast}
-              detailedView = {openMeteoDetailedView}
+              weather = {openMeteoDataState === 'success' ? openMeteoData.hourlyForecast.hourlyWeather : null}
+              onOff = {openMeteoDetailedView}
+            />
+
+            <DetailedTable
+              // weather = {openMeteoData}
+              weather = {openMeteoDataState === 'success' ? openMeteoData.hourlyForecast.hourlyAQI : null}
+              onOff = {openMeteoAirQualityView}
             />
           </div>
 
@@ -214,6 +231,8 @@ export default function Home() {
                 sunset: openWeatherMapData.currentForecast.sunset,
               } : 'loading'
             }
+            airQualityButton = {false}
+
             detailedViewButton = {updateOpenWeatherMapDetailedView}
 
           />
@@ -223,7 +242,7 @@ export default function Home() {
 
             <DetailedTable
               weather = {dummyWeatherObject}
-              detailedView = {openWeatherMapDetailedView}
+              onOff = {openWeatherMapDetailedView}
             />
           </div>
 
@@ -246,6 +265,7 @@ export default function Home() {
                   windSpeed:  `${weatherAPIData.currentForecast.windSpeed} mph`
                 } : 'loading'
               }
+              airQualityButton = {false}
 
             />
 
@@ -255,7 +275,7 @@ export default function Home() {
 
             <DetailedTable
               weather = {dummyWeatherObject}
-              detailedView = {weatherApiDetailedView}
+              onOff = {weatherApiDetailedView}
             />
 
           </div>

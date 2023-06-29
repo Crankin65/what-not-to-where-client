@@ -1,11 +1,27 @@
 import React from 'react';
-import {makeNormalCase} from '@/HelperFunctions/Current Weather Details'
+import {makeNormalCase, localTime} from '@/HelperFunctions/Current Weather Details'
+
+function localHour(string) {
+	if (parseInt(string.slice(11,13)) >= 13 ) {
+		let hour = parseInt(string.slice(11,13)) - 12
+		return `${hour}:${string.slice(14,17)}PM`
+	} else {
+		return `${string.slice(11,17)}AM`
+	}
+}
+
+function getDayOfWeek(date) {
+	let d = new Date(date)
+	return d.toLocaleString('en-us', {weekday: 'long'});
+	console.log(day);
+}
 
 export default function DetailedTable(props){
 
 	const weatherObject = props.weather;
 
-if (props.detailedView) {
+
+if (props.onOff) {
 	return (
 		<div className='shadow-md overflow-hidden my-8'>
 			<table className=' table-auto w-full border border-separate border-spacing-1 border-slate-500 bg-gray-900'>
@@ -25,7 +41,7 @@ if (props.detailedView) {
 
 							{Object.values(row).map((element) => {
 								return(
-									<td className='border border-slate-700' key={element}>{element}</td>
+									<td className='border border-slate-700' key={element}>{typeof element === 'string' && element.length === 16 ? `${getDayOfWeek(element.slice(0,10))} ${localHour(element)}` : element }</td>
 								)})}
 
 						</tr>

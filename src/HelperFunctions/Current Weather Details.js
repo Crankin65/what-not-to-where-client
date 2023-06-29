@@ -5,7 +5,7 @@ export function makeNormalCase(word) {
 	return output
 }
 
-function localTime(string) {
+export function localTime(string) {
 	let date = new Date(string)
 	return date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
 }
@@ -27,5 +27,6 @@ export function CurrentWeatherDetails(props){
 
 module.exports = {
 	makeNormalCase: makeNormalCase,
-	CurrentWeatherDetails: CurrentWeatherDetails
+	CurrentWeatherDetails: CurrentWeatherDetails,
+	localTime: localTime
 }
