@@ -28,7 +28,7 @@ function createAirQualityButton() {
 
 			<div className='flex flex-col justify-evenly rounded gap-8'>
 				<div className='flex flex-row w-5/6 '>
-					<p className='flex bg-green-800 rounded opacity-30'>{props.source}  </p>
+					<p className='flex  '>{props.source}  </p>
 					{/*<p className='flex font-light text-xs px-2'> Latitude: {props.sourceState === 'loading' ? 'loading' : props.sourceData.latitude  }</p>*/}
 					{/*<p className='flex font-light text-xs px-2'> Longitude: {props.sourceState === 'loading' ? 'loading' : props.sourceData.longitude  }</p>*/}
 				</div>

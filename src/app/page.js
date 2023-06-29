@@ -204,11 +204,16 @@ export default function Home() {
               onOff = {openMeteoDetailedView}
             />
 
+          </div>
+
+            <div className='flex'>
+
             <DetailedTable
               // weather = {openMeteoData}
               weather = {openMeteoDataState === 'success' ? openMeteoData.hourlyForecast.hourlyAQI : null}
               onOff = {openMeteoAirQualityView}
             />
+
           </div>
 
         </div>
@@ -241,7 +246,7 @@ export default function Home() {
           <div className='flex'>
 
             <DetailedTable
-              weather = {dummyWeatherObject}
+              weather = {openWeatherState === 'success' ? openWeatherMapData.hourlyForecast: null}
               onOff = {openWeatherMapDetailedView}
             />
           </div>
@@ -274,7 +279,7 @@ export default function Home() {
           <div className='flex'>
 
             <DetailedTable
-              weather = {dummyWeatherObject}
+              weather = {weatherAPIState === 'success' ? weatherAPIData.hourlyForecast : null}
               onOff = {weatherApiDetailedView}
             />
 
