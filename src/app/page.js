@@ -174,7 +174,13 @@ export default function Home() {
           <WeatherSection
             source = "Open Meteo Weather"
             sourceState = {openMeteoDataState}
-            currentForecast = {openMeteoData.currentForecast}
+            currentForecast = { openMeteoDataState === 'success' ?
+              {
+                currentTemp: `${openMeteoData.currentForecast.currentTemp}°`,
+                weather: openMeteoData.currentForecast.weather,
+                windSpeed: `${openMeteoData.currentForecast.windSpeed} mph`
+              } : 'loading'
+            }
 
             detailedViewButton = {updateOpenMeteoDetailedView}
           />
@@ -197,7 +203,17 @@ export default function Home() {
             source = "Open Weather Map"
             sourceState = {openWeatherState}
             sourceData = {openWeatherMapData.currentForecast}
-            currentForecast = {createCurrentForecastObjects.openWeatherMapCurrentForecast}
+            currentForecast = { openWeatherState === 'success' ?
+              {
+                feelsLikeTemp: `${openWeatherMapData.currentForecast.feelsLike}°`,
+                lowTemp: `${openWeatherMapData.currentForecast.minTemp}°`,
+                highTemp: `${openWeatherMapData.currentForecast.maxTemp}°`,
+                humidity: openWeatherMapData.currentForecast.humidity,
+                windSpeed: `${openWeatherMapData.currentForecast.windSpeed} mph`,
+                sunrise: openWeatherMapData.currentForecast.sunrise,
+                sunset: openWeatherMapData.currentForecast.sunset,
+              } : 'loading'
+            }
             detailedViewButton = {updateOpenWeatherMapDetailedView}
 
           />
