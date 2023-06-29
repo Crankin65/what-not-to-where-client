@@ -7,10 +7,10 @@ import Image from 'next/image'
 import {SunIcon, Bars3Icon, UserIcon} from "../Icons/Tailwind Icons";
 
 const navigation = [
-	{ id:0, name: 'Dashboard', href: '#', current: true },
-	{ id:1, name: 'Team', href: '#', current: false },
-	{ id:2, name: 'Projects', href: '#', current: false },
-	{ id:3, name: 'Calendar', href: '#', current: false },
+	{ id:0, name: 'Home', href: '#' },
+	{ id:1, name: 'About', href: '#'},
+	// { id:2, name: 'Projects', href: '#', current: false },
+	// { id:3, name: 'Calendar', href: '#', current: false },
 ]
 
 function classNames(...classes) {

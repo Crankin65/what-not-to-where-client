@@ -12,6 +12,7 @@ import pingAllWeatherAPIs from "@/API-Calls/pingAllWeatherAPIs";
 import DetailedTable from "@/Components/DetailedTable";
 
 
+
 export default function Home() {
   const [openMeteoDataState, setopenMeteoDataState] = useState('loading');
   const [openMeteoData, setOpenMeteoData] = useState({});
@@ -173,6 +174,7 @@ export default function Home() {
 
           <WeatherSection
             source = "Open Meteo Weather"
+            sourceData = {openMeteoData.currentForecast}
             // currentTemp = {returnOpenMeteoCurrentTemp}
             detailedViewButton = {updateOpenMeteoDetailedView}
             // currentTemp = {openMeteoDataState === 'loading' ? 'loading' : console.log(openMeteoData)}
@@ -197,7 +199,8 @@ export default function Home() {
 
           <WeatherSection
             source = "Open Weather Map"
-            currentTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMapData.currentWeather.feels_like}
+            sourceData = {openWeatherMapData.currentForecast}
+            // currentTemp = {openWeatherState === 'loading' ? 'loading' : openWeatherMapData.currentForecast.feels_like}
             // currentTemp = {openWeatherState === 'loading' ? 'loading' : openMeteoData.currentWeather.feels_like}
             detailedViewButton = {updateOpenWeatherMapDetailedView}
 
@@ -219,6 +222,7 @@ export default function Home() {
 
             <WeatherSection
               source = "Weather API"
+              sourceData = {weatherAPIData.currentForecast}
               currentTemp = {weatherAPIState === 'loading' ? 'loading' : weatherAPIData.currentForecast.temperature}
               detailedViewButton = {updateWeatherAPIDetailedView}
 
