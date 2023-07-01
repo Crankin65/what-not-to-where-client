@@ -2,14 +2,12 @@
 
 "use client";
 import React, { useState, useEffect } from 'react'
-import Navbar from "../Components/Navbar";
 import Navbar2 from "../Components/Navbar2"
 import WeatherSection from "../Components/WeatherSection";
-import {dummyWeatherObject} from "@/API-Calls/dummyWeatherObject";
-
 import pingAllWeatherAPIs from "@/API-Calls/pingAllWeatherAPIs";
-
 import DetailedTable from "@/Components/DetailedTable";
+import '../app/globals.css'
+
 
 export default function Home() {
   const [openMeteoDataState, setopenMeteoDataState] = useState('loading');
@@ -164,7 +162,8 @@ export default function Home() {
 
   return (
     <>
-      <nav className='mx-0  px-0 sm:px-6 lg:px-8'>
+      {/*mx-0  px-0 sm:px-6 lg:px-8'*/}
+      <nav className=''>
         {/*<Navbar />*/}
         <Navbar2
           updateCitySelection = {updateCitySelection}

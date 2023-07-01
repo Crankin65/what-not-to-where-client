@@ -7,8 +7,8 @@ import Image from 'next/image'
 import {SunIcon, Bars3Icon, UserIcon} from "../Icons/Tailwind Icons";
 
 const navigation = [
-	{ id:0, name: 'Home', href: '#' },
-	{ id:1, name: 'About', href: '#'},
+	{ id:0, name: 'Home', href: '/' },
+	{ id:1, name: 'About', href: '/about'},
 	// { id:2, name: 'Projects', href: '#', current: false },
 	// { id:3, name: 'Calendar', href: '#', current: false },
 ]
