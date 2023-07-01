@@ -165,7 +165,7 @@ export default function Home() {
   return (
     <>
       <nav className='mx-0  px-0 sm:px-6 lg:px-8'>
-        <Navbar />
+        {/*<Navbar />*/}
         <Navbar2
           updateCitySelection = {updateCitySelection}
           currentCity = {citySelection}
