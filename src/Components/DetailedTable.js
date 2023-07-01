@@ -21,37 +21,48 @@ export default function DetailedTable(props){
 	const weatherObject = props.weather;
 
 
-if (props.onOff) {
-	return (
-		<div className='shadow-md overflow-hidden my-8'>
-			<table className=' table-auto w-full border border-separate border-spacing-1 border-slate-500 bg-gray-900'>
-				<thead>
-				<tr>
-					{Object.keys(weatherObject[0]).map((title) => {
-							return <th className='border border-slate-600 px-2 mx-2 gap-4' key={title}>{makeNormalCase(title)}</th>
-						})
-					}
-				</tr>
-				</thead>
-
-				<tbody>
-				{weatherObject.map((row, index) => {
-					return (
-						<tr key={index} className='even:bg-gray-700'>
-
-							{Object.values(row).map((element) => {
-								return(
-									<td className='border border-slate-700' key={element}>{typeof element === 'string' && element.length === 16 ? `${getDayOfWeek(element.slice(0,10))} ${localHour(element)}` : element }</td>
-								)})}
-
+	if (props.onOff) {
+		if (weatherObject) {
+			return (
+				<div className='shadow-md overflow-hidden my-8'>
+					<table className=' table-auto w-full border border-separate border-spacing-1 border-slate-500 bg-gray-900'>
+						<thead>
+						<tr>
+							{Object.keys(weatherObject[0]).map((title) => {
+								return <th className='border border-slate-600 px-2 mx-2 gap-4' key={title}>{makeNormalCase(title)}</th>
+							})
+							}
 						</tr>
-					)
+						</thead>
 
-				})}
-				</tbody>
-			</table>
-		</div>
-	)
-}
+						<tbody>
+						{weatherObject.map((row, index) => {
+							return (
+								<tr key={index} className='even:bg-gray-700'>
+
+									{Object.values(row).map((element) => {
+										return (
+											<td className='border border-slate-700'
+													key={element}>{typeof element === 'string' && element.length === 16 ? `${getDayOfWeek(element.slice(0, 10))} ${localHour(element)}` : element}</td>
+										)
+									})}
+
+								</tr>
+							)
+
+						})}
+						</tbody>
+					</table>
+				</div>
+			)
+		} else if (!weatherObject){
+			return (
+				<div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 py-4 gap-2" role="alert">
+					<p className="font-bold">No City Selected</p>
+					<p>Please enter a city if you want to access the detailed view.</p>
+				</div>
+			)
+		}
+	}
 
 }

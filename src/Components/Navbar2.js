@@ -20,6 +20,7 @@ function classNames(...classes) {
 
 export default function Navbar2(props) {
 	const [searchInput, setSearchInput] = useState("");
+	const [threeBarMenuStatus, setThreeBarMenuStatus] = useState(false)
 
 	const handleChange = (value) => {
 		setSearchInput(value)
@@ -44,11 +45,24 @@ export default function Navbar2(props) {
 		}
 	}
 
+	function expandMenu(){
+		let routerButtons = document.getElementById('router-buttons');
+
+		if (threeBarMenuStatus === false) {
+			setThreeBarMenuStatus(true)
+			routerButtons.classList.remove('sm:hidden')
+		} else if (threeBarMenuStatus === true){
+			setThreeBarMenuStatus(false)
+			routerButtons.classList.add('sm:hidden')
+		}
+
+	}
+
 	return (
 		<nav as='nav' className='bg-gray-800 w-full mx-0 px-0'>
 			<div className='flex flex-row justify-between px-2 py-3'>
 
-				<div className='flex justify-start md:hidden'>
+				<div className='flex justify-start md:hidden' onClick={expandMenu}>
 					<Bars3Icon />
 				</div>
 
@@ -56,8 +70,8 @@ export default function Navbar2(props) {
 				{/*	<SunIcon />*/}
 				{/*</div>*/}
 
-				<div className='sm:hidden md:flex flex-row items-center justify-items-center'>
-					<ul className='md:flex flex-row justify-around sm: hidden'>
+				<div id='router-buttons' className='sm:hidden md:flex flex-row items-center justify-items-center'>
+					<ul className='md:flex flex-row justify-around'>
 						{navigation.map((item) => (
 							<Link className='flex px-2 mx-2 text-white bg-gray-700 font-normal rounded hover:bg-gray-800' key={item.id} href={item.href}> {item.name} </Link>
 						))}
