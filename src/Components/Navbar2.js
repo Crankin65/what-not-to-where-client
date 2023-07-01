@@ -71,7 +71,7 @@ export default function Navbar2(props) {
 				{/*</div>*/}
 
 				<div id='router-buttons' className='sm:hidden md:flex flex-row items-center justify-items-center'>
-					<ul className='md:flex flex-row justify-around'>
+					<ul className='md:flex flex flex-row justify-around'>
 						{navigation.map((item) => (
 							<Link className='flex px-2 mx-2 text-white bg-gray-700 font-normal rounded hover:bg-gray-800' key={item.id} href={item.href}> {item.name} </Link>
 						))}

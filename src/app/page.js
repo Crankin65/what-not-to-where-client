@@ -39,6 +39,8 @@ export default function Home() {
             if (res.openMeteoForecast) {
               setopenMeteoDataState('success');
               setOpenMeteoData(res.openMeteoForecast);
+            } else {
+              setopenMeteoDataState('error');
             }
           })
       .catch((err) => {
@@ -237,7 +239,7 @@ export default function Home() {
             }
             airQualityButton = {false}
 
-            detailedViewButton = {updateOpenWeatherMapDetailedView}
+            updateDetailedViewButton = {updateOpenWeatherMapDetailedView}
 
           />
 
@@ -259,7 +261,6 @@ export default function Home() {
               source = "Weather API"
               sourceState = {weatherAPIState}
               sourceData = {weatherAPIData.currentForecast}
-              detailedViewButton = {updateWeatherAPIDetailedView}
               currentForecast = { weatherAPIState === 'success' ?
                 {
                   currentTemp: `${weatherAPIData.currentForecast.temperature}°` ,
@@ -270,6 +271,8 @@ export default function Home() {
                 } : 'loading'
               }
               airQualityButton = {false}
+              updateDetailedViewButton = {updateWeatherAPIDetailedView}
+
 
             />
 
