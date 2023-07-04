@@ -1,4 +1,7 @@
 import React from 'react';
+import Image from 'next/image'
+import tanktopIcon from '../Icons/ClothingIcons/icons8-basketball-jersey-50.png'
+
 import {CurrentWeatherDetails} from "@/HelperFunctions/Current Weather Details";
 
 export default function WeatherSection(props){
@@ -23,14 +26,15 @@ function createAirQualityButton() {
 	}
 }
 
+
+
+
 	return (
 		<div className='bg-gray-800 rounded flex flex-row justify-between px-2 py-2 w-5/6 '>
 
 			<div className='flex flex-col justify-evenly rounded gap-8'>
 				<div className='flex flex-row w-5/6 '>
 					<p className='flex  '>{props.source}  </p>
-					{/*<p className='flex font-light text-xs px-2'> Latitude: {props.sourceState === 'loading' ? 'loading' : props.sourceData.latitude  }</p>*/}
-					{/*<p className='flex font-light text-xs px-2'> Longitude: {props.sourceState === 'loading' ? 'loading' : props.sourceData.longitude  }</p>*/}
 				</div>
 				<div className='flex flex-row gap-4'>
 					<div className='flex flex-row'>

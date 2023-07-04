@@ -5,11 +5,13 @@ import Link from 'next/link';
 
 import Image from 'next/image'
 import {SunIcon, Bars3Icon, UserIcon} from "../Icons/Tailwind Icons";
+import tanktopIcon from "@/Icons/ClothingIcons/icons8-basketball-jersey-50.png";
+import umbrella from '../Icons/ClothingIcons/icons8-umbrella-50.png'
 
 const navigation = [
 	{ id:0, name: 'Home', href: '/' },
 	{ id:1, name: 'About', href: '/about'},
-	// { id:2, name: 'Projects', href: '#', current: false },
+	// { id:2, name: 'What To Wear', href: '/whattowear'},
 	// { id:3, name: 'Calendar', href: '#', current: false },
 ]
 
@@ -58,6 +60,30 @@ export default function Navbar2(props) {
 
 	}
 
+	function openClothingModal() {
+
+		window.my_modal_3.showModal()
+
+		return(
+			<div className='bg-gray-700'>
+				<dialog id="my_modal_3" className="modal bg-gray-300">
+					<form method="dialog" className="modal-box ">
+						<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+						<h3 className="font-bold text-lg">It feels like: XXdegrees </h3>
+						{/*<p className="py-4">You should wear: a tank top</p>*/}
+						<Image
+							src={tanktopIcon}
+							width={50}
+							height={50}
+							alt="Picture of the author"
+						/>
+					</form>
+				</dialog>
+			</div>
+		)
+	}
+
+
 	return (
 		<nav as='nav' className='bg-gray-800 w-full mx-0 px-0 fixed top-0 left-0 right-0'>
 			<div className='flex flex-row justify-between px-2 py-3'>
@@ -66,9 +92,6 @@ export default function Navbar2(props) {
 					<Bars3Icon />
 				</div>
 
-				{/*<div className='md:flex justify-start px-4  sm:hidden flex '>*/}
-				{/*	<SunIcon />*/}
-				{/*</div>*/}
 
 				<div id='router-buttons' className='sm:hidden md:flex flex-row items-center justify-items-center'>
 					<ul className='md:flex flex flex-row justify-around'>
@@ -76,6 +99,27 @@ export default function Navbar2(props) {
 							<Link className='flex px-2 mx-2 text-white bg-gray-700 font-normal rounded hover:bg-gray-800' key={item.id} href={item.href}> {item.name} </Link>
 						))}
 					</ul>
+					<ul>
+						{/*<button className='btn flex px-2 mx-2 text-white bg-gray-700 font-normal rounded hover:bg-gray-800' onClick={()=>window.my_modal_3.showModal()}>What Should I Wear?</button>*/}
+						<button className='btn flex px-2 mx-2 text-white bg-gray-700 font-normal rounded hover:bg-gray-800' onClick={openClothingModal}>What Should I Wear?</button>
+					</ul>
+				</div>
+
+
+				<div className='bg-gray-700'>
+					<dialog id="my_modal_3" className="modal bg-gray-300">
+						<form method="dialog" className="modal-box ">
+							<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+							<h3 className="font-bold text-lg">It feels like: XXdegrees </h3>
+							<p className="py-4">You should bring a:</p>
+							<Image
+								src= {umbrella}
+								width={50}
+								height={50}
+								alt="Picture of the author"
+							/>
+						</form>
+					</dialog>
 				</div>
 
 				{displayCurrentCity(props.currentCity)}
