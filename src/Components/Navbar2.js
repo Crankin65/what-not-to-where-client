@@ -37,8 +37,8 @@ export default function Navbar2(props) {
 			let capitalizedCity = city.charAt(0).toUpperCase() + city.slice(1);
 			return(
 				<div className='flex flex-row gap-2 items-center font-light'>
-					<p className='flex'>The current city is: {capitalizedCity}</p>
-					{props.weatherAPIData.currentForecast ? <p className='flex'> The coordinates are: {props.weatherAPIData.currentForecast.latitude} by
+					<p className='flex'>{capitalizedCity}</p>
+					{props.weatherAPIData.currentForecast ? <p className='flex'> Coordinates: {props.weatherAPIData.currentForecast.latitude} by
 						{props.weatherAPIData.currentForecast.longitude}</p> : ''}
 				</div>
 			)
@@ -59,7 +59,7 @@ export default function Navbar2(props) {
 	}
 
 	return (
-		<nav as='nav' className='bg-gray-800 w-full mx-0 px-0'>
+		<nav as='nav' className='bg-gray-800 w-full mx-0 px-0 fixed top-0 left-0 right-0'>
 			<div className='flex flex-row justify-between px-2 py-3'>
 
 				<div className='flex justify-start md:hidden' onClick={expandMenu}>

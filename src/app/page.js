@@ -175,7 +175,7 @@ export default function Home() {
         />
       </nav>
 
-      <main className="flex flex-col gap-8 py-8">
+      <main className="flex flex-col gap-8 py-20">
 
         {/* Open Meteo Weather*/}
         <div className='flex flex-col justify-center items-center'>
