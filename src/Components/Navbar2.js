@@ -43,9 +43,11 @@ export default function Navbar2(props) {
 		if (city !== '' && props.weatherAPIData && weatherState === 'success'){
 			let capitalizedCity = toTitleCase(city)
 			return(
-				<div className='flex flex-row gap-2 items-center font-light'>
-					<div className='flex mx-2 px-2 rounded'>
-						<p className='flex'>{capitalizedCity}</p>
+				<div className='flex flex-row  gap-2 items-center font-light'>
+
+					<div className='flex md:flex-col md:items-center md:justify-center mx-2 px-2 rounded'>
+						<p className='flex mx-2 font-normal'>Selected City:</p>
+						<p className='flex mx-2'>{capitalizedCity}</p>
 					</div>
 
 					<div className='mx-2 px-2 flex-col rounded hidden md:visible md:flex'>
@@ -71,6 +73,7 @@ export default function Navbar2(props) {
 	function expandMenu(){
 		let routerButtons = document.getElementById('router-buttons');
 		let searchForm = document.getElementById('search-form')
+		let appName = document.getElementById('app-name')
 
 		if (threeBarMenuStatus === false) {
 			setThreeBarMenuStatus(true)
@@ -78,12 +81,14 @@ export default function Navbar2(props) {
 			routerButtons.classList.remove('flex-row')
 			routerButtons.classList.add('flex-col')
 			searchForm.classList.remove('flex-row')
+			appName.classList.add('hidden')
 
 		} else if (threeBarMenuStatus === true){
 			setThreeBarMenuStatus(false)
 			routerButtons.classList.add('hidden')
 			routerButtons.classList.add('flex-row')
 			routerButtons.classList.remove('flex-col')
+			appName.classList.remove('hidden')
 
 		}
 
@@ -95,6 +100,10 @@ export default function Navbar2(props) {
 
 				<div className='flex justify-start md:hidden' onClick={expandMenu}>
 					<Bars3Icon />
+				</div>
+
+				<div id='app-name' className='flex mx-2 px-2 py-2 font-extrabold bg-neutral-900 rounded items-center justify-center'>
+					<p className='flex'>What Not to Where App</p>
 				</div>
 
 
