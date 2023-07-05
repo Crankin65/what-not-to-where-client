@@ -7,8 +7,11 @@ import { Inter } from 'next/font/google'
 export default function About() {
 	return(
 		<>
-			<Navbar2 />
-			<div className='py-8 mx-2 px-2'>
+			<nav>
+				<Navbar2 />
+			</nav>
+
+			<div className='py-8 mx-2 px-2 pt-8'>
 				<ProductDescription />
 			</div>
 

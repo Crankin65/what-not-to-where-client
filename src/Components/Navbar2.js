@@ -1,12 +1,12 @@
 "use client";
-import { Disclosure, Menu, Transition } from '@headlessui/react'
 import React, {useState} from "react";
 import Link from 'next/link';
 
-import Image from 'next/image'
 import ClothingModal2 from "@/Components/ClothingModal2";
 import {Bars3Icon, UserIcon} from "../Icons/Tailwind Icons";
-import tanktopIcon from "@/Icons/ClothingIcons/icons8-basketball-jersey-50.png";
+import Router from "next/router";
+import {useRouter} from "next/navigation";
+
 
 const navigation = [
 	{ id:0, name: 'Home', href: '/' },
@@ -23,14 +23,20 @@ function classNames(...classes) {
 export default function Navbar2(props) {
 	const [searchInput, setSearchInput] = useState("");
 	const [threeBarMenuStatus, setThreeBarMenuStatus] = useState(false)
+	const router = useRouter();
+
 
 	const handleChange = (value) => {
 		setSearchInput(value)
 	}
 	const onSubmit = (e) => {
-		e.preventDefault()
+		// e.preventDefault()
 		let cityName = e.target.city.value
+
+		// router.push(`/weather/${cityName}`)
+		// router.push(`/${cityName}`)
 		props.updateCitySelection(cityName)
+
 	}
 
 	function toTitleCase(str) {

@@ -7,9 +7,12 @@ import WeatherSection from "../Components/WeatherSection";
 import pingAllWeatherAPIs from "@/API-Calls/pingAllWeatherAPIs";
 import DetailedTable from "@/Components/DetailedTable";
 import '../app/globals.css'
+import Footer from "@/Components/Footer";
+import {useRouter, useSearchParams} from "next/navigation";
 
 
-export default function Home() {
+
+export default function Home(props) {
   const [openMeteoDataState, setopenMeteoDataState] = useState('loading');
   const [openMeteoData, setOpenMeteoData] = useState({});
   const [openMeteoDetailedView, setOpenMeteoDetailedView] = useState(false)
@@ -25,6 +28,9 @@ export default function Home() {
 
   const [citySelection, setCitySelection ] = useState('');
   const [coordinates, setCoordinates] = useState([])
+
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   const updateCitySelection = (city) => {
     setCitySelection(city)
@@ -120,6 +126,16 @@ export default function Home() {
   }
 
 
+
+  useEffect(() => {
+      if (searchParams.get('city')) {
+        updateCitySelection(searchParams.get('city'))
+      } else  {
+        updateCitySelection('')
+      }
+    }, [searchParams.get('city')])
+
+
   async function createCurrentForecastObjects() {
 
       let openMeteoCurrentForecastObject = {}
@@ -187,7 +203,7 @@ export default function Home() {
       <main className="flex flex-col gap-8 my-4 py-20">
 
         {/* Open Meteo Weather*/}
-        <div className='flex flex-col justify-center items-center pt-8'>
+        <div className='flex flex-col justify-center items-center pt-16'>
 
           <WeatherSection
             source = "Open Meteo Weather"
@@ -299,6 +315,8 @@ export default function Home() {
         </div>
 
       </main>
+
+      <Footer />
     </>
   )
 }
