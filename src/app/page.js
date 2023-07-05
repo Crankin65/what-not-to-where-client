@@ -173,8 +173,14 @@ export default function Home() {
         <Navbar2
           updateCitySelection = {updateCitySelection}
           currentCity = {citySelection}
-          weatherAPIData = {weatherAPIData}
           openMeteoDataState = {openMeteoDataState}
+          openWeatherMapState = {openWeatherState}
+          weatherAPIState = {weatherAPIState}
+
+          openMeteoData = {openMeteoData}
+          weatherAPIData = {weatherAPIData}
+          openWeatherMap = {openWeatherMapData}
+
         />
       </nav>
 
