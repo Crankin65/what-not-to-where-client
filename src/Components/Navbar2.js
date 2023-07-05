@@ -48,9 +48,14 @@ export default function Navbar2(props) {
 						<p className='flex'>{capitalizedCity}</p>
 					</div>
 
-					<div className='mx-2 px-2 rounded hidden md:visible md:flex'>
-						{props.weatherAPIData.currentForecast ? <p className='flex'> Coordinates: {props.weatherAPIData.currentForecast.latitude} by
-							{props.weatherAPIData.currentForecast.longitude}</p> : ''}
+					<div className='mx-2 px-2 flex-col rounded hidden md:visible md:flex'>
+						{props.weatherAPIData.currentForecast ?
+							<>
+							<p className='flex'> Coordinates: </p>
+								<p className='flex'>
+								{props.weatherAPIData.currentForecast.latitude} by &nbsp;
+								{props.weatherAPIData.currentForecast.longitude}</p>
+							</>: ''}
 					</div>
 				</div>
 			)
