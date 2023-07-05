@@ -33,14 +33,25 @@ export default function Navbar2(props) {
 		props.updateCitySelection(cityName)
 	}
 
+	function toTitleCase(str) {
+		return str.replace(/\w\S*/g, function(txt){
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		});
+	}
+
 	function displayCurrentCity(city, weatherState) {
 		if (city !== '' && props.weatherAPIData && weatherState === 'success'){
-			let capitalizedCity = city.charAt(0).toUpperCase() + city.slice(1);
+			let capitalizedCity = toTitleCase(city)
 			return(
 				<div className='flex flex-row gap-2 items-center font-light'>
-					<p className='flex'>{capitalizedCity}</p>
-					{props.weatherAPIData.currentForecast ? <p className='flex'> Coordinates: {props.weatherAPIData.currentForecast.latitude} by
-						{props.weatherAPIData.currentForecast.longitude}</p> : ''}
+					<div className='flex mx-2 px-2 rounded'>
+						<p className='flex'>{capitalizedCity}</p>
+					</div>
+
+					<div className='mx-2 px-2 rounded hidden md:visible md:flex'>
+						{props.weatherAPIData.currentForecast ? <p className='flex'> Coordinates: {props.weatherAPIData.currentForecast.latitude} by
+							{props.weatherAPIData.currentForecast.longitude}</p> : ''}
+					</div>
 				</div>
 			)
 		} else if (weatherState === 'error') {
@@ -54,35 +65,23 @@ export default function Navbar2(props) {
 	}
 	function expandMenu(){
 		let routerButtons = document.getElementById('router-buttons');
+		let searchForm = document.getElementById('search-form')
 
 		if (threeBarMenuStatus === false) {
 			setThreeBarMenuStatus(true)
-			routerButtons.classList.remove('sm:hidden')
+			routerButtons.classList.remove('hidden')
+			routerButtons.classList.remove('flex-row')
+			routerButtons.classList.add('flex-col')
+			searchForm.classList.remove('flex-row')
+
 		} else if (threeBarMenuStatus === true){
 			setThreeBarMenuStatus(false)
-			routerButtons.classList.add('sm:hidden')
+			routerButtons.classList.add('hidden')
+			routerButtons.classList.add('flex-row')
+			routerButtons.classList.remove('flex-col')
+
 		}
 
-	}
-	function openClothingModal() {
-
-		return(
-			<div className='bg-gray-700'>
-				<dialog id="my_modal_3" className="modal bg-gray-300">
-					<form method="dialog" className="modal-box ">
-						<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-						<h3 className="font-bold text-lg">It feels like: XXdegrees </h3>
-						{/*<p className="py-4">You should wear: a tank top</p>*/}
-						<Image
-							src={tanktopIcon}
-							width={50}
-							height={50}
-							alt="Picture of the author"
-						/>
-					</form>
-				</dialog>
-			</div>
-		)
 	}
 
 	return (
@@ -94,15 +93,13 @@ export default function Navbar2(props) {
 				</div>
 
 
-				<div id='router-buttons' className='sm:hidden md:flex flex-row items-center justify-items-center'>
+				<div id='router-buttons' className='hidden md:visible md:flex flex-row items-center justify-items-center'>
 					<ul className='md:flex flex flex-row justify-around'>
 						{navigation.map((item) => (
 							<Link className='flex px-2 mx-2 text-white bg-gray-700 font-normal rounded hover:bg-gray-800' key={item.id} href={item.href}> {item.name} </Link>
 						))}
 					</ul>
-					<ul>
-						{/*<button className='btn flex px-2 mx-2 text-white bg-gray-700 font-normal rounded hover:bg-gray-800' onClick={()=>window.my_modal_3.showModal()}>What Should I Wear?</button>*/}
-						{/*<button className='btn flex px-2 mx-2 text-white bg-gray-700 font-normal rounded hover:bg-gray-800' onClick={openClothingModal}>What Should I Wear?</button>*/}
+					<ul className='flex flex-row py-2'>
 						{ props.openMeteoDataState === 'success' ? <ClothingModal2
 							openWeatherMapState = {props.openWeatherMapState}
 							weatherAPIState = {props.weatherAPIState}
@@ -114,39 +111,21 @@ export default function Navbar2(props) {
 					</ul>
 				</div>
 
-				{/*<div className='bg-gray-700'>*/}
-				{/*	<dialog id="my_modal_3" className="modal bg-gray-300">*/}
-				{/*		<form method="dialog" className="modal-box ">*/}
-				{/*			<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>*/}
-				{/*			<h3 className="font-bold text-lg">It feels like: XXdegrees </h3>*/}
-				{/*			<p className="py-4">You should bring a:</p>*/}
-				{/*			<Image*/}
-				{/*				src= {umbrella}*/}
-				{/*				width={50}*/}
-				{/*				height={50}*/}
-				{/*				alt="Picture of the author"*/}
-				{/*			/>*/}
-				{/*		</form>*/}
-				{/*	</dialog>*/}
-				{/*</div>*/}
-
 				{displayCurrentCity(props.currentCity, props.openMeteoDataState)}
 
-				<div className='flex justify-end'>
-					<form className= 'flex' method='get' onSubmit={onSubmit}>
+				<div id ='search-form' className='flex justify-center items-center'>
+
+					<form className= 'flex sm:flex-row flex-col sm:justify-center gap-2 items-end' method='get' onSubmit={onSubmit}>
 						<input
-							className='mx-2 px-2 text-black justify-end items-end'
-							placeholder='city search'
+							className='mx-2 px-2 text-black  w-32'
+							placeholder='city'
 							value={searchInput}
 							name='city'
 							onChange={(e) => handleChange(e.target.value)}
 						/>
-						<button className='text-white bg-blue-600 hover:bg-blue-900 rounded px-2 mx-2' type="submit">Submit</button>
+						<button className='flex text-white items-center justify-center bg-blue-600 hover:bg-blue-900 rounded px-2 mx-2 w-32' type="submit">Submit</button>
 					</form>
 
-					<div className='flex justify-end '>
-						<UserIcon />
-					</div>
 				</div>
 
 

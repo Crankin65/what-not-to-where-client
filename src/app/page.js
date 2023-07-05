@@ -187,7 +187,7 @@ export default function Home() {
       <main className="flex flex-col gap-8 my-4 py-20">
 
         {/* Open Meteo Weather*/}
-        <div className='flex flex-col justify-center items-center'>
+        <div className='flex flex-col justify-center items-center pt-8'>
 
           <WeatherSection
             source = "Open Meteo Weather"
