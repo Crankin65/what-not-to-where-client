@@ -41,6 +41,8 @@ export default function Home() {
               setOpenMeteoData(res.openMeteoForecast);
             } else {
               setopenMeteoDataState('error');
+              console.log('the open meteo state is error')
+              console.log(openMeteoDataState)
             }
           })
       .catch((err) => {
@@ -103,9 +105,10 @@ export default function Home() {
           }
         })
         .catch((err) => {
-          // console.log('Error:',err);
           setWeatherAPIState('error')
-          throw(err)
+          console.log('the weather API state is error')
+          console.log(weatherAPIDataState)
+
         })}
   },[citySelection]);
   function updateWeatherAPIDetailedView(){
@@ -171,11 +174,11 @@ export default function Home() {
           updateCitySelection = {updateCitySelection}
           currentCity = {citySelection}
           weatherAPIData = {weatherAPIData}
-
+          openMeteoDataState = {openMeteoDataState}
         />
       </nav>
 
-      <main className="flex flex-col gap-8 py-20">
+      <main className="flex flex-col gap-8 my-4 py-20">
 
         {/* Open Meteo Weather*/}
         <div className='flex flex-col justify-center items-center'>

@@ -34,8 +34,8 @@ export default function Navbar2(props) {
 		props.updateCitySelection(cityName)
 	}
 
-	function displayCurrentCity(city) {
-		if (city !== '' && props.weatherAPIData){
+	function displayCurrentCity(city, weatherState) {
+		if (city !== '' && props.weatherAPIData && weatherState === 'success'){
 			let capitalizedCity = city.charAt(0).toUpperCase() + city.slice(1);
 			return(
 				<div className='flex flex-row gap-2 items-center font-light'>
@@ -44,8 +44,16 @@ export default function Navbar2(props) {
 						{props.weatherAPIData.currentForecast.longitude}</p> : ''}
 				</div>
 			)
+		} else if (weatherState === 'error') {
+			return(
+				<div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 " role="alert">
+					{/*<p className="font-bold">Invalid City</p>*/}
+					<p>Please enter a valid city.</p>
+				</div>
+			)
 		}
 	}
+
 
 	function expandMenu(){
 		let routerButtons = document.getElementById('router-buttons');
@@ -122,7 +130,7 @@ export default function Navbar2(props) {
 					</dialog>
 				</div>
 
-				{displayCurrentCity(props.currentCity)}
+				{displayCurrentCity(props.currentCity, props.openMeteoDataState)}
 
 				<div className='flex justify-end'>
 					<form className= 'flex' method='get' onSubmit={onSubmit}>
