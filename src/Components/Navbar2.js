@@ -51,9 +51,9 @@ export default function Navbar2(props) {
 			return(
 				<div className='flex flex-row text-gray-500 dark:text-gray-400 gap-2 items-center '>
 
-					<div className='flex md:flex-col md:items-center md:justify-center mx-2 px-2 rounded'>
-						<p className='flex mx-2 '>Selected City:</p>
-						<p className='flex mx-2'>{capitalizedCity}</p>
+					<div id='selected-city' className='flex flex-col md:flex-col md:items-center md:justify-center rounded'>
+						<p className='flex px-1 '>Selected City:</p>
+						<p className='flex px-1'>{capitalizedCity}</p>
 					</div>
 
 					<div className='mx-2 px-2 flex-col rounded hidden md:visible md:flex'>
@@ -78,8 +78,9 @@ export default function Navbar2(props) {
 	}
 	function expandMenu(){
 		let routerButtons = document.getElementById('router-buttons');
-		let searchForm = document.getElementById('search-form')
-		let appName = document.getElementById('app-name')
+		let searchForm = document.getElementById('search-form');
+		let appName = document.getElementById('app-name');
+		let selectedCity = document.getElementById('selected-city')
 
 		if (threeBarMenuStatus === false) {
 			setThreeBarMenuStatus(true)
@@ -88,6 +89,7 @@ export default function Navbar2(props) {
 			routerButtons.classList.add('flex-col')
 			searchForm.classList.remove('flex-row')
 			appName.classList.add('hidden')
+			selectedCity.classList.add('hidden')
 
 		} else if (threeBarMenuStatus === true){
 			setThreeBarMenuStatus(false)
@@ -95,6 +97,7 @@ export default function Navbar2(props) {
 			routerButtons.classList.add('flex-row')
 			routerButtons.classList.remove('flex-col')
 			appName.classList.remove('hidden')
+			selectedCity.classList.remove('hidden')
 
 		}
 

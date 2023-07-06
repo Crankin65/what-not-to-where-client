@@ -85,7 +85,7 @@ export default function ClothingModal2(props) {
 			<button className='btn flex px-2 mx-2 text-gray-500 bg-white hover:bg-gray-100 dark:text-white dark:bg-gray-700 font-normal rounded dark:hover:bg-gray-800' onClick={updateModalStatus}>What Should I Wear?</button>
 
 			<Transition.Root show={clothingModalStatus} as={Fragment}>
-				<Dialog as="div" className="relative z-10"  onClose={setClothingModalStatus}>
+				<Dialog as="div" className="relative z-20"  onClose={setClothingModalStatus}>
 					<Transition.Child
 						as={Fragment}
 						enter="ease-out duration-300"
