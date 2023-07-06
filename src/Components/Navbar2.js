@@ -49,10 +49,10 @@ export default function Navbar2(props) {
 		if (city !== '' && props.weatherAPIData && weatherState === 'success'){
 			let capitalizedCity = toTitleCase(city)
 			return(
-				<div className='flex flex-row  gap-2 items-center font-light'>
+				<div className='flex flex-row text-gray-500 dark:text-gray-400 gap-2 items-center '>
 
 					<div className='flex md:flex-col md:items-center md:justify-center mx-2 px-2 rounded'>
-						<p className='flex mx-2 font-normal'>Selected City:</p>
+						<p className='flex mx-2 '>Selected City:</p>
 						<p className='flex mx-2'>{capitalizedCity}</p>
 					</div>
 
@@ -101,43 +101,46 @@ export default function Navbar2(props) {
 	}
 
 	return (
-		<nav as='nav' className='bg-gray-800 w-full mx-0 px-0 fixed top-0 left-0 right-0'>
+		<nav as='nav' className='bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-400 w-full mx-0 px-0 fixed top-0 left-0 right-0'>
 			<div className='flex flex-row justify-between px-2 py-3'>
 
-				<div className='flex justify-start md:hidden' onClick={expandMenu}>
-					<Bars3Icon />
-				</div>
+				<div className='flex flex-row justify-start px-2 '>
+					<div className='flex justify-start md:hidden' onClick={expandMenu}>
+						<Bars3Icon />
+					</div>
 
-				<div id='app-name' className='flex mx-2 px-2 py-2 font-extrabold bg-neutral-900 rounded items-center justify-center'>
-					<p className='flex'>What Not to Where App</p>
-				</div>
+					<div id='app-name' className='flex mx-2 px-2 py-2 font-extrabold bg-white shadow dark:bg-neutral-900 rounded items-center justify-center'>
+						<p className='flex'>What Not to Where App</p>
+					</div>
 
 
-				<div id='router-buttons' className='hidden md:visible md:flex flex-row items-center justify-items-center'>
-					<ul className='md:flex flex flex-row justify-around'>
-						{navigation.map((item) => (
-							<Link className='flex px-2 mx-2 text-white bg-gray-700 font-normal rounded hover:bg-gray-800' key={item.id} href={item.href}> {item.name} </Link>
-						))}
-					</ul>
-					<ul className='flex flex-row py-2'>
-						{ props.openMeteoDataState === 'success' ? <ClothingModal2
-							openWeatherMapState = {props.openWeatherMapState}
-							weatherAPIState = {props.weatherAPIState}
+					<div id='router-buttons' className='hidden md:visible md:flex flex-row items-center md:justify-start sm:justify-items-center'>
+						<ul className='md:flex flex flex-row justify-around'>
+							{navigation.map((item) => (
+								<Link className='flex px-2 mx-2 dark:text-white bg-white hover:bg-gray-100 text-gray-500 dark:bg-gray-700 font-normal rounded dark:hover:bg-gray-800' key={item.id} href={item.href}> {item.name} </Link>
+							))}
+						</ul>
+						<ul className='flex flex-row py-2'>
+							{ props.openMeteoDataState === 'success' ? <ClothingModal2
+								openWeatherMapState = {props.openWeatherMapState}
+								weatherAPIState = {props.weatherAPIState}
 
-							openMeteoData = {props.openMeteoData}
-							weatherAPIData = {props.weatherAPIData}
-							openWeatherMapData = {props.openWeatherMap}
-							/> : null}
-					</ul>
-				</div>
+								openMeteoData = {props.openMeteoData}
+								weatherAPIData = {props.weatherAPIData}
+								openWeatherMapData = {props.openWeatherMap}
+								/> : null}
+						</ul>
+					</div>
+
+			</div>
 
 				{displayCurrentCity(props.currentCity, props.openMeteoDataState)}
 
-				<div id ='search-form' className='flex justify-center items-center'>
+				<div id ='search-form' className='flex justify-center items-center dark:bg-gray-800'>
 
-					<form className= 'flex sm:flex-row flex-col sm:justify-center gap-2 items-end' method='get' onSubmit={onSubmit}>
+					<form className= 'flex sm:flex-row flex-col sm:justify-center gap-2 items-end ' method='get' onSubmit={onSubmit}>
 						<input
-							className='mx-2 px-2 text-black  w-32'
+							className='mx-2 px-2 text-black border-gray-200 border-2 w-32'
 							placeholder='city'
 							value={searchInput}
 							name='city'
