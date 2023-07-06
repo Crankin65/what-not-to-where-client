@@ -25,11 +25,11 @@ export default function DetailedTable(props){
 		if (weatherObject) {
 			return (
 				<div className='shadow-md my-8 w-screen text-gray-800 dark:text-white font-normal'>
-					<table className='md:table-auto md:w-full w-fit border border-separate dark:border-spacing-1 dark:border-slate-500 bg-white dark:bg-gray-900'>
+					<table className='md:table-auto md:w-full w-fit border border-separate border-slate-300 dark:border-spacing-1 dark:border-slate-500 bg-white dark:bg-gray-900'>
 						<thead className=''>
 							<tr className=''>
 								{Object.keys(weatherObject[0]).map((title) => {
-									return <th className='border border-slate-600 px-2 mx-2 gap-4 sticky md:top-12 top-20 bg-gray-200 dark:bg-gray-900' key={title}>{makeNormalCase(title)}</th>
+									return <th className='border px-2 mx-2 gap-4 border-slate-300 sticky md:top-12 top-20 bg-gray-200 dark:bg-gray-900' key={title}>{makeNormalCase(title)}</th>
 								})
 								}
 							</tr>
@@ -42,7 +42,7 @@ export default function DetailedTable(props){
 
 									{Object.values(row).map((element) => {
 										return (
-											<td className='border border-slate-700'
+											<td className='border border-slate-300 dark:border-slate-700'
 													key={`${row}${element}`}>{typeof element === 'string' && element.length === 16 ? `${getDayOfWeek(element.slice(0, 10))} ${localHour(element)}` : element}</td>
 										)
 									})}
