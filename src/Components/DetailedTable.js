@@ -24,12 +24,12 @@ export default function DetailedTable(props){
 	if (props.onOff) {
 		if (weatherObject) {
 			return (
-				<div className='shadow-md my-8'>
-					<table className=' table-auto w-full border border-separate border-spacing-1 border-slate-500 bg-gray-900'>
+				<div className='shadow-md my-8 w-screen text-gray-800 font-normal'>
+					<table className='md:table-auto md:w-full w-fit border border-separate dark:border-spacing-1 dark:border-slate-500 bg-white dark:bg-gray-900'>
 						<thead className=''>
 							<tr className=''>
 								{Object.keys(weatherObject[0]).map((title) => {
-									return <th className='border border-slate-600 px-2 mx-2 gap-4 sticky top-12 bg-gray-900' key={title}>{makeNormalCase(title)}</th>
+									return <th className='border border-slate-600 px-2 mx-2 gap-4 sticky md:top-12 top-20 bg-gray-200 dark:bg-gray-900' key={title}>{makeNormalCase(title)}</th>
 								})
 								}
 							</tr>
@@ -38,7 +38,7 @@ export default function DetailedTable(props){
 						<tbody>
 						{weatherObject.map((row, index) => {
 							return (
-								<tr key={`${row}${index}`} className='even:bg-gray-700'>
+								<tr key={`${row}${index}`} className=' even:bg-gray-200 dark:even:bg-gray-700'>
 
 									{Object.values(row).map((element) => {
 										return (
