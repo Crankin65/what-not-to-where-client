@@ -89,7 +89,10 @@ export default function Navbar2(props) {
 			routerButtons.classList.add('flex-col')
 			searchForm.classList.remove('flex-row')
 			appName.classList.add('hidden')
+
+			if (selectedCity) {
 			selectedCity.classList.add('hidden')
+			}
 
 		} else if (threeBarMenuStatus === true){
 			setThreeBarMenuStatus(false)
@@ -97,8 +100,10 @@ export default function Navbar2(props) {
 			routerButtons.classList.add('flex-row')
 			routerButtons.classList.remove('flex-col')
 			appName.classList.remove('hidden')
-			selectedCity.classList.remove('hidden')
 
+			if (selectedCity) {
+				selectedCity.classList.remove('hidden')
+			}
 		}
 
 	}

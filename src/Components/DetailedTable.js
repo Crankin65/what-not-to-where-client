@@ -24,7 +24,7 @@ export default function DetailedTable(props){
 	if (props.onOff) {
 		if (weatherObject) {
 			return (
-				<div className='shadow-md my-8 w-screen text-gray-800 font-normal'>
+				<div className='shadow-md my-8 w-screen text-gray-800 dark:text-white font-normal'>
 					<table className='md:table-auto md:w-full w-fit border border-separate dark:border-spacing-1 dark:border-slate-500 bg-white dark:bg-gray-900'>
 						<thead className=''>
 							<tr className=''>
