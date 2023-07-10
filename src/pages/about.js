@@ -12,7 +12,7 @@ export default function About() {
 				<Navbar2 />
 			</nav>
 
-			<div className='py-8 mx-2 px-2 pt-8 bg-white dark:bg-gray-800 '>
+			<div className=''>
 				<ProductDescription />
 			</div>
 
