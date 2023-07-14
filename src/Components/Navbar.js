@@ -1,143 +1,169 @@
 "use client";
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon} from "@/Icons/Tailwind Icons";
+import React, {useState} from "react";
+import Link from 'next/link';
+
+import ClothingModal2 from "@/Components/ClothingModal2";
+import {Bars3Icon, UserIcon} from "../Icons/Tailwind Icons";
+import Router from "next/router";
+import {useRouter} from "next/navigation";
+
 
 const navigation = [
-	{ name: 'Dashboard', href: '#', current: true },
-	{ name: 'Team', href: '#', current: false },
-	{ name: 'Projects', href: '#', current: false },
-	{ name: 'Calendar', href: '#', current: false },
+	{ id:0, name: 'Home', href: '/' },
+	{ id:1, name: 'About', href: '/about'},
+	// { id:2, name: 'What To Wear', href: '/whattowear'},
+	// { id:3, name: 'Calendar', href: '#', current: false },
 ]
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar() {
-	return (
-		<Disclosure as="nav" className="bg-gray-800">
-			{({ open }) => (
-				<>
-					<div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-						<div className="relative flex h-16 items-center justify-between">
-							<div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-								{/* Mobile menu button*/}
-								<Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-									<span className="sr-only">Open main menu</span>
-									{open ? (
-										<XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-									) : (
-										<Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-									)}
-								</Disclosure.Button>
-							</div>
-							<div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-								<div className="flex flex-shrink-0 items-center">
-								</div>
-								<div className="hidden sm:ml-6 sm:block">
-									<div className="flex items-center space-x-4 justify-between">
-										{navigation.map((item) => (
-											<a
-												key={item.name}
-												href={item.href}
-												className={classNames(
-													item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-													'rounded-md px-3 py-2 text-sm font-medium'
-												)}
-												aria-current={item.current ? 'page' : undefined}
-											>
-												{item.name}
-											</a>
-										))}
-									</div>
-								</div>
-							</div>
-							<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-								<button
-									type="button"
-									className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-								>
-									<span className="sr-only">View notifications</span>
-									<BellIcon className="h-6 w-6" aria-hidden="true" />
-								</button>
 
-								{/* Profile dropdown */}
-								<Menu as="div" className="relative ml-3">
-									<div>
-										<Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-											<span className="sr-only">Open user menu</span>
-										</Menu.Button>
-									</div>
-									<Transition
-										as={Fragment}
-										enter="transition ease-out duration-100"
-										enterFrom="transform opacity-0 scale-95"
-										enterTo="transform opacity-100 scale-100"
-										leave="transition ease-in duration-75"
-										leaveFrom="transform opacity-100 scale-100"
-										leaveTo="transform opacity-0 scale-95"
-									>
-										<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-											<Menu.Item>
-												{({ active }) => (
-													<a
-														href="#"
-														className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-													>
-														Your Profile
-													</a>
-												)}
-											</Menu.Item>
-											<Menu.Item>
-												{({ active }) => (
-													<a
-														href="#"
-														className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-													>
-														Settings
-													</a>
-												)}
-											</Menu.Item>
-											<Menu.Item>
-												{({ active }) => (
-													<a
-														href="#"
-														className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-													>
-														Sign out
-													</a>
-												)}
-											</Menu.Item>
-										</Menu.Items>
-									</Transition>
-								</Menu>
-							</div>
-						</div>
+export default function Navbar2(props) {
+	const [searchInput, setSearchInput] = useState("");
+	const [threeBarMenuStatus, setThreeBarMenuStatus] = useState(false)
+	const router = useRouter();
+
+
+	const handleChange = (value) => {
+		setSearchInput(value)
+	}
+	const onSubmit = (e) => {
+		// e.preventDefault()
+		let cityName = e.target.city.value
+
+		// router.push(`/weather/${cityName}`)
+		// router.push(`/${cityName}`)
+		props.updateCitySelection(cityName)
+
+	}
+
+	function toTitleCase(str) {
+		return str.replace(/\w\S*/g, function(txt){
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		});
+	}
+
+	function displayCurrentCity(city, weatherState) {
+		if (city !== '' && props.weatherAPIData && weatherState === 'success'){
+			let capitalizedCity = toTitleCase(city)
+			return(
+				<div className='flex flex-row text-gray-500 dark:text-gray-400 gap-2 items-center '>
+
+					<div id='selected-city' className='flex flex-col md:flex-col md:items-center md:justify-center rounded'>
+						<p className='flex px-1 '>Selected City:</p>
+						<p className='flex px-1'>{capitalizedCity}</p>
 					</div>
 
-					<Disclosure.Panel className="sm:hidden">
-						<div className="space-y-1 px-2 pb-3 pt-2">
+					<div className='mx-2 px-2 flex-col rounded hidden md:visible md:flex'>
+						{props.weatherAPIData.currentForecast ?
+							<>
+							<p className='flex'> Coordinates: </p>
+								<p className='flex'>
+								{props.weatherAPIData.currentForecast.latitude} by &nbsp;
+								{props.weatherAPIData.currentForecast.longitude}</p>
+							</>: ''}
+					</div>
+				</div>
+			)
+		} else if (weatherState === 'error') {
+			return(
+				<div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 " role="alert">
+					{/*<p className="font-bold">Invalid City</p>*/}
+					<p>Please enter a valid city.</p>
+				</div>
+			)
+		}
+	}
+	function expandMenu(){
+		let routerButtons = document.getElementById('router-buttons');
+		let searchForm = document.getElementById('search-form');
+		let appName = document.getElementById('app-name');
+		let selectedCity = document.getElementById('selected-city')
+
+		if (threeBarMenuStatus === false) {
+			setThreeBarMenuStatus(true)
+			routerButtons.classList.remove('hidden')
+			routerButtons.classList.remove('flex-row')
+			routerButtons.classList.add('flex-col')
+			searchForm.classList.remove('flex-row')
+			appName.classList.add('hidden')
+
+			if (selectedCity) {
+			selectedCity.classList.add('hidden')
+			}
+
+		} else if (threeBarMenuStatus === true){
+			setThreeBarMenuStatus(false)
+			routerButtons.classList.add('hidden')
+			routerButtons.classList.add('flex-row')
+			routerButtons.classList.remove('flex-col')
+			appName.classList.remove('hidden')
+
+			if (selectedCity) {
+				selectedCity.classList.remove('hidden')
+			}
+		}
+
+	}
+
+	return (
+		<nav as='nav' className='bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-400 w-full mx-0 px-0 fixed top-0 left-0 right-0'>
+			<div className='flex flex-row justify-between px-2 py-3'>
+
+				<div className='flex flex-row justify-start px-2 '>
+					<div className='flex justify-start md:hidden' onClick={expandMenu}>
+						<Bars3Icon />
+					</div>
+
+					<div id='app-name' className='flex mx-2 px-2 py-2 font-extrabold bg-white shadow dark:bg-neutral-900 rounded items-center justify-center'>
+						<p className='flex'>What Not to Where App</p>
+					</div>
+
+
+					<div id='router-buttons' className='hidden md:visible md:flex flex-row items-center md:justify-start sm:justify-items-center'>
+						<ul className='md:flex flex flex-row justify-around'>
 							{navigation.map((item) => (
-								<Disclosure.Button
-									key={item.name}
-									as="a"
-									href={item.href}
-									className={classNames(
-										item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-										'block rounded-md px-3 py-2 text-base font-medium'
-									)}
-									aria-current={item.current ? 'page' : undefined}
-								>
-									{item.name}
-								</Disclosure.Button>
+								<Link className='flex px-2 mx-2 dark:text-white bg-white hover:bg-gray-100 text-gray-500 dark:bg-gray-700 font-normal rounded dark:hover:bg-gray-800' key={item.id} href={item.href}> {item.name} </Link>
 							))}
-						</div>
-					</Disclosure.Panel>
-				</>
-			)}
-		</Disclosure>
+						</ul>
+						<ul className='flex flex-row py-2'>
+							{ props.openMeteoDataState === 'success' && props.openWeatherMapState === 'success' && props.weatherAPIState === 'success' ? <ClothingModal2
+								openWeatherMapState = {props.openWeatherMapState}
+								weatherAPIState = {props.weatherAPIState}
+
+								openMeteoData = {props.openMeteoData}
+								weatherAPIData = {props.weatherAPIData}
+								openWeatherMapData = {props.openWeatherMap}
+								/> : null}
+						</ul>
+					</div>
+
+			</div>
+
+				{displayCurrentCity(props.currentCity, props.openMeteoDataState)}
+
+				<div id ='search-form' className='flex justify-center items-center dark:bg-gray-800'>
+
+					<form className= 'flex sm:flex-row flex-col sm:justify-center gap-2 items-end ' method='get' onSubmit={onSubmit}>
+						<input
+							className='mx-2 px-2 text-black border-gray-200 border-2 w-32'
+							placeholder='city'
+							value={searchInput}
+							name='city'
+							onChange={(e) => handleChange(e.target.value)}
+						/>
+						<button className='flex text-white items-center justify-center bg-blue-600 hover:bg-blue-900 rounded px-2 mx-2 w-32' type="submit">Submit</button>
+					</form>
+
+				</div>
+
+
+			</div>
+		</nav>
 	)
 }
+
 
 
