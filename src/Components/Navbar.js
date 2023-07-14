@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import Link from 'next/link';
 
-import ClothingModal2 from "@/Components/ClothingModal2";
+import ClothingModal from "@/Components/ClothingModal";
 import {Bars3Icon, UserIcon} from "../Icons/Tailwind Icons";
 import Router from "next/router";
 import {useRouter} from "next/navigation";
@@ -20,7 +20,7 @@ function classNames(...classes) {
 }
 
 
-export default function Navbar2(props) {
+export default function Navbar(props) {
 	const [searchInput, setSearchInput] = useState("");
 	const [threeBarMenuStatus, setThreeBarMenuStatus] = useState(false)
 	const router = useRouter();
@@ -129,7 +129,7 @@ export default function Navbar2(props) {
 							))}
 						</ul>
 						<ul className='flex flex-row py-2'>
-							{ props.openMeteoDataState === 'success' && props.openWeatherMapState === 'success' && props.weatherAPIState === 'success' ? <ClothingModal2
+							{ props.openMeteoDataState === 'success' && props.openWeatherMapState === 'success' && props.weatherAPIState === 'success' ? <ClothingModal
 								openWeatherMapState = {props.openWeatherMapState}
 								weatherAPIState = {props.weatherAPIState}
 

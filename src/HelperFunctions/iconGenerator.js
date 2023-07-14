@@ -18,9 +18,12 @@ import winterBoots from '../Icons/ClothingIcons/icons8-winter-boots-50.png'
 
 export default function IconGenerator(props){
 	function determineIcon() {
-		let averageRealFeel = (props.weatherAPICurrentForcastData.feelsLikeTemp + props.openWeatherMapFeelsLike) / 2
+		let averageRealFeel = (props.weatherAPICurrentForecastData.feelsLikeTemp + props.openWeatherMapFeelsLike) / 2
 
-		if (props.weatherAPICurrentForcastData.weather.includes('rain') || props.openMeteoCurrentForecastData.weather.includes('rain')) {
+		if (props.weatherAPICurrentForecastData.weather.toLowerCase().includes('rain') || props.openMeteoCurrentForecastData.weather.toLowerCase().includes('rain')
+			||props.weatherAPICurrentForecastData.weather.toLowerCase().includes('drizzle') || props.weatherAPICurrentForecastData.weather.toLowerCase().includes('thunder')
+			|| props.openMeteoCurrentForecastData.weather.toLowerCase().includes('drizzle') || props.openMeteoCurrentForecastData.weather.toLowerCase().includes('thunderstorm') )
+		{
 			return (
 				<div className='flex'>
 					<div className='flex'>
@@ -28,7 +31,7 @@ export default function IconGenerator(props){
 							src= {openUmbrella}
 							width={50}
 							height={50}
-							alt="Picture of the author"
+							alt="Open Umbrella"
 						/>
 					</div>
 
@@ -37,7 +40,7 @@ export default function IconGenerator(props){
 							src= {raincoat}
 							width={50}
 							height={50}
-							alt="Picture of the author"
+							alt="Raincoat"
 						/>
 					</div>
 				</div>
@@ -51,7 +54,7 @@ export default function IconGenerator(props){
 							src= {mensShirt}
 							width={50}
 							height={50}
-							alt="Picture of the author"
+							alt="Man's shirt"
 						/>
 					</div>
 
@@ -60,7 +63,7 @@ export default function IconGenerator(props){
 							src= {womensShirt}
 							width={50}
 							height={50}
-							alt="Picture of the author"
+							alt="Woman's shirt"
 						/>
 					</div>
 				</div>
@@ -74,7 +77,7 @@ export default function IconGenerator(props){
 							src= {slipDress}
 							width={50}
 							height={50}
-							alt="Picture of the author"
+							alt="Dress"
 						/>
 					</div>
 
@@ -83,7 +86,7 @@ export default function IconGenerator(props){
 							src= {polo}
 							width={50}
 							height={50}
-							alt="Picture of the author"
+							alt="Polo"
 						/>
 					</div>
 				</div>
@@ -97,7 +100,7 @@ export default function IconGenerator(props){
 							src= {jumper}
 							width={50}
 							height={50}
-							alt="Picture of the author"
+							alt="Jumper"
 						/>
 					</div>
 
@@ -106,12 +109,12 @@ export default function IconGenerator(props){
 							src= {pants}
 							width={50}
 							height={50}
-							alt="Picture of the author"
+							alt="Pants"
 						/>
 					</div>
 				</div>
 			)
-		} else if (averageRealFeel < 54) {
+		} else if (averageRealFeel < 54 || props.openMeteoData.currentForecast.weather.toLowerCase().includes('snow') || props.weatherAPICurrentForecastData.weather.toLowerCase().includes('snow') ) {
 			return (
 				<div className='flex'>
 
@@ -120,7 +123,7 @@ export default function IconGenerator(props){
 							src= {jacket}
 							width={50}
 							height={50}
-							alt="Picture of the author"
+							alt="Jacket"
 						/>
 					</div>
 
@@ -129,7 +132,7 @@ export default function IconGenerator(props){
 							src= {winterBoots}
 							width={50}
 							height={50}
-							alt="Picture of the author"
+							alt="Winter Boots"
 						/>
 					</div>
 				</div>

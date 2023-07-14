@@ -11,7 +11,7 @@ import IconGenerator from "@/HelperFunctions/iconGenerator";
 import WeatherDescription from "@/HelperFunctions/WeatherDescription";
 import Image from "next/image";
 
-export default function ClothingModal2(props) {
+export default function ClothingModal(props) {
 	const [clothingModalStatus, setClothingModalStatus] = useState(false);
 
 	function updateModalStatus() {

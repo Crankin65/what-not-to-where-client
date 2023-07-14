@@ -1,6 +1,6 @@
 import React from 'react';
 import '../app/globals.css'
-import Navbar2 from "@/Components/Navbar2";
+import Navbar from "@/Components/Navbar";
 import ProductDescription from "@/Components/ProductDescription";
 import { Inter } from 'next/font/google'
 import Footer from "@/Components/Footer";
@@ -9,7 +9,7 @@ export default function About() {
 	return(
 		<>
 			<nav>
-				<Navbar2 />
+				<Navbar />
 			</nav>
 
 			<div className=''>

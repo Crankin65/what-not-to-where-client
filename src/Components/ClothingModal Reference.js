@@ -3,7 +3,7 @@ import Image from "next/image";
 import tanktopIcon from "@/Icons/ClothingIcons/icons8-basketball-jersey-50.png";
 
 
-export default function ClothingModal() {
+export default function ClothingModalReference() {
 
 	function createTankTopIcon() {
 		return (

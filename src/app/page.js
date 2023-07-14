@@ -2,7 +2,7 @@
 
 "use client";
 import React, { useState, useEffect } from 'react'
-import Navbar2 from "../Components/Navbar2"
+import Navbar from "../Components/Navbar"
 import WeatherSection from "../Components/WeatherSection";
 import pingAllWeatherAPIs from "@/API-Calls/pingAllWeatherAPIs";
 import DetailedTable from "@/Components/DetailedTable";
@@ -185,8 +185,8 @@ export default function Home(props) {
     <>
       {/*mx-0  px-0 sm:px-6 lg:px-8'*/}
       <nav className=''>
-        {/*<Navbar />*/}
-        <Navbar2
+        {/*<NavbarReference />*/}
+        <Navbar
           updateCitySelection = {updateCitySelection}
           currentCity = {citySelection}
           openMeteoDataState = {openMeteoDataState}
