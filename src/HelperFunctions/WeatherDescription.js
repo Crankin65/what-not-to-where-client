@@ -5,8 +5,9 @@ export default function WeatherDescription(props) {
 	function createDescriptionText() {
 		let averageRealFeel = (props.weatherAPICurrentForecastData.feelsLikeTemp + props.openWeatherMapFeelsLike) / 2
 
-		if (props.weatherAPICurrentForecastData.weather.includes('rain') || props.openMeteoCurrentForecastData.weather.includes('rain')
-			|| props.weatherAPICurrentForecastData.weather.includes('thunder') || props.openMeteoCurrentForecastData.weather.includes('thunder')) {
+		if (props.weatherAPICurrentForecastData.weather.toLowerCase().includes('rain') || props.openMeteoCurrentForecastData.weather.toLowerCase().includes('rain')
+			|| props.weatherAPICurrentForecastData.weather.toLowerCase().includes('thunder') || props.openMeteoCurrentForecastData.weather.toLowerCase().includes('thunderstorm')
+		|| props.weatherAPICurrentForecastData.weather.toLowerCase().includes('drizzle') || props.openMeteoCurrentForecastData.weather.toLowerCase().includes('drizzle') ) {
 			return "Looks like it's rainy, make sure to protect yourself from the rain!"
 		} else if (averageRealFeel >= 85) {
 			return "You should wear something light It's pretty hot outside."

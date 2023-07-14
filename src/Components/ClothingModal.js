@@ -142,8 +142,7 @@ export default function ClothingModal(props) {
 															/>
 
 															: null }
-														{/*Are you sure you want to deactivate your account? All of your data will be permanently*/}
-														{/*removed. This action cannot be undone.*/}
+
 													</p>
 												</div>
 
@@ -172,13 +171,7 @@ export default function ClothingModal(props) {
 										>
 											Close
 										</button>
-										{/*<button*/}
-										{/*	type="button"*/}
-										{/*	className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"*/}
-										{/*	onClick={() => setClothingModalStatus(false)}*/}
-										{/*>*/}
-										{/*	Cancel*/}
-										{/*</button>*/}
+
 									</div>
 								</Dialog.Panel>
 							</Transition.Child>

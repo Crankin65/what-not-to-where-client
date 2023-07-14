@@ -8,7 +8,7 @@ import pingAllWeatherAPIs from "@/API-Calls/pingAllWeatherAPIs";
 import DetailedTable from "@/Components/DetailedTable";
 import '../app/globals.css'
 import Footer from "@/Components/Footer";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useSearchParams} from "next/navigation";
 
 
 
@@ -27,9 +27,7 @@ export default function Home(props) {
   const [weatherApiDetailedView, setWeatherApiDetailedView] = useState(false)
 
   const [citySelection, setCitySelection ] = useState('');
-  const [coordinates, setCoordinates] = useState([])
 
-  const router = useRouter()
   const searchParams = useSearchParams()
 
   const updateCitySelection = (city) => {
@@ -126,7 +124,6 @@ export default function Home(props) {
   }
 
 
-
   useEffect(() => {
       if (searchParams.get('city')) {
         updateCitySelection(searchParams.get('city'))
@@ -136,56 +133,9 @@ export default function Home(props) {
     }, [searchParams.get('city')])
 
 
-  async function createCurrentForecastObjects() {
-
-      let openMeteoCurrentForecastObject = {}
-
-      openMeteoCurrentForecastObject = {
-        currentTemp: openMeteoData.currentForecast.currentTemp,
-        weather: openMeteoData.currentForecast.weather,
-        windSpeed: openMeteoData.currentForecast.windSpeed
-      }
-
-
-    if (openWeatherState === 'success') {
-      let openWeatherMapCurrentForecastObject = {}
-
-      openWeatherMapCurrentForecastObject = {
-        feelsLikeTemp: openWeatherMapData.currentForecast.feelsLike,
-        lowTemp: openWeatherMapData.currentForecast.minTemp,
-        highTemp: openWeatherMapData.currentForecast.maxTemp,
-        humidity: openWeatherMapData.currentForecast.humidity,
-        windSpeed: openWeatherMapData.currentForecast.windSpeed,
-        sunrise: openWeatherMapData.currentForecast.sunrise,
-        sunset: openWeatherMapData.currentForecast.sunset,
-      }
-    }
-
-    let currentForecastObject = {}
-
-    currentForecastObject = {
-      openMeteoCurrentForecast: openMeteoCurrentForecastObject ,
-      openWeatherMapCurrentForecast: openWeatherMapCurrentForecastObject,
-      weatherAPICurrentForecast:  {
-        currentTemp: await weatherAPIData.currentForecast.temperature,
-        feelsLikeTemp: await weatherAPIData.currentForecast.feelsLikeTemp,
-        weather: await weatherAPIData.currentForecast.weather,
-        humidty: await weatherAPIData.currentForecast.humidity,
-        windSpeed: await weatherAPIData.currentForecast.windSpeed
-      }
-
-    }
-    console.log('------')
-    console.log(currentForecastObject.weatherAPICurrentForecast)
-    return currentForecastObject
-  }
-
-
   return (
     <>
-      {/*mx-0  px-0 sm:px-6 lg:px-8'*/}
       <nav className=''>
-        {/*<NavbarReference />*/}
         <Navbar
           updateCitySelection = {updateCitySelection}
           currentCity = {citySelection}
@@ -225,7 +175,6 @@ export default function Home(props) {
           <div className='flex'>
 
             <DetailedTable
-              // weather = {openMeteoData}
               weather = {openMeteoDataState === 'success' ? openMeteoData.hourlyForecast.hourlyWeather : null}
               onOff = {openMeteoDetailedView}
             />
@@ -235,7 +184,6 @@ export default function Home(props) {
             <div className='flex'>
 
             <DetailedTable
-              // weather = {openMeteoData}
               weather = {openMeteoDataState === 'success' ? openMeteoData.hourlyForecast.hourlyAQI : null}
               onOff = {openMeteoAirQualityView}
             />

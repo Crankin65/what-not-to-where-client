@@ -3,38 +3,23 @@ import React, {useState} from "react";
 import Link from 'next/link';
 
 import ClothingModal from "@/Components/ClothingModal";
-import {Bars3Icon, UserIcon} from "../Icons/Tailwind Icons";
-import Router from "next/router";
-import {useRouter} from "next/navigation";
-
+import {Bars3Icon} from "../Icons/Tailwind Icons";
 
 const navigation = [
 	{ id:0, name: 'Home', href: '/' },
 	{ id:1, name: 'About', href: '/about'},
-	// { id:2, name: 'What To Wear', href: '/whattowear'},
-	// { id:3, name: 'Calendar', href: '#', current: false },
 ]
-
-function classNames(...classes) {
-	return classes.filter(Boolean).join(' ')
-}
-
 
 export default function Navbar(props) {
 	const [searchInput, setSearchInput] = useState("");
 	const [threeBarMenuStatus, setThreeBarMenuStatus] = useState(false)
-	const router = useRouter();
 
 
 	const handleChange = (value) => {
 		setSearchInput(value)
 	}
 	const onSubmit = (e) => {
-		// e.preventDefault()
 		let cityName = e.target.city.value
-
-		// router.push(`/weather/${cityName}`)
-		// router.push(`/${cityName}`)
 		props.updateCitySelection(cityName)
 
 	}
@@ -70,12 +55,12 @@ export default function Navbar(props) {
 		} else if (weatherState === 'error') {
 			return(
 				<div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 " role="alert">
-					{/*<p className="font-bold">Invalid City</p>*/}
 					<p>Please enter a valid city.</p>
 				</div>
 			)
 		}
 	}
+
 	function expandMenu(){
 		let routerButtons = document.getElementById('router-buttons');
 		let searchForm = document.getElementById('search-form');
