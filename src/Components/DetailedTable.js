@@ -29,7 +29,7 @@ export default function DetailedTable(props){
 						<thead className=''>
 							<tr className=''>
 								{Object.keys(weatherObject[0]).map((title) => {
-									return <th className='border px-2 mx-2 gap-4 border-slate-300 sticky md:top-12 top-20 bg-gray-200 dark:bg-gray-900' key={title}>{makeNormalCase(title)}</th>
+									return <th className='border px-2 mx-2 gap-4 border-slate-300 sticky top-32 sm:top-16 md:top-28 lg:top-16 xl:top-16 bg-gray-200 dark:bg-gray-900' key={title}>{makeNormalCase(title)}</th>
 								})
 								}
 							</tr>
