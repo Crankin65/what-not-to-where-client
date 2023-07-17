@@ -5,6 +5,10 @@ function localHour(string) {
 	if (parseInt(string.slice(11,13)) >= 13 ) {
 		let hour = parseInt(string.slice(11,13)) - 12
 		return `${hour}:${string.slice(14,17)}PM`
+	} else if (parseInt(string.slice(11,13)) === 12 ) {
+		return `12:${string.slice(14,17)}PM`
+	} else if (parseInt(string.slice(11,13)) === 0 ) {
+		return `12:${string.slice(14,17)}AM`
 	} else {
 		return `${string.slice(11,17)}AM`
 	}
