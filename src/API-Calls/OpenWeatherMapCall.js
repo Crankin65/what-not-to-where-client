@@ -4,7 +4,7 @@ async function weatherCheckOpenWeather(coordinates) {
 		// console.log(coordinates)
 		const response = await fetch(`https://express-weather-server.onrender.com/openweather/${coordinates.latitude}/${coordinates.longitude}`, {
 		method: 'GET',
-		mode: "no-cors"
+		mode: "cors"
 	});
 		let formattedData = await response.json();
 
