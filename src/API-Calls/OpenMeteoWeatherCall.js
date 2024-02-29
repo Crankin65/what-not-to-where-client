@@ -1,8 +1,9 @@
 async function weatherCheckOpenMeteo(latitude,longitude) {
 	if (latitude && longitude) {
 
-		const response = await fetch(`http://localhost:8000/openmeteo/${latitude}/${longitude}`, {
-			method: 'GET'
+		const response = await fetch(`https://express-weather-server.onrender.com/openmeteo/${latitude}/${longitude}`, {
+			method: 'GET',
+			mode: "cors"
 		});
 		let formattedData = await response.json();
 		// console.log(await formattedData)

@@ -97,7 +97,7 @@ export default function Navbar(props) {
 		<nav as='nav' className='bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-400 w-full mx-0 px-0 fixed top-0 left-0 right-0'>
 			<div className='flex flex-row justify-between px-2 py-3'>
 
-				<div className='flex flex-row justify-start px-2 '>
+				<div className='flex flex-row justify-start px-2  '>
 					<div className='flex justify-start md:hidden' onClick={expandMenu}>
 						<Bars3Icon />
 					</div>

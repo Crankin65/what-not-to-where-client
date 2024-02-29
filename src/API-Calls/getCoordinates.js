@@ -1,7 +1,8 @@
 export default async function getCoordinates(city) {
 	if (city) {
-		const response = await fetch(`http://localhost:8000/get/${city}`, {
-			method: 'GET'
+		const response = await fetch(`https://express-weather-server.onrender.com/get/${city}`, {
+			method: 'GET',
+			mode: "cors"
 		});
 
 		const formattedData = await response.json();
