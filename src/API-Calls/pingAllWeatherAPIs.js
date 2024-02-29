@@ -4,7 +4,7 @@ export default async function pingAllWeatherAPIs(city){
 		const response = await fetch(`https://express-weather-server.onrender.com/get/weather/${city}`, {
 
 			method: 'GET',
-			mode: "cors"
+			mode: "no-cors"
 		});
 
 		const formattedData = await response.json();

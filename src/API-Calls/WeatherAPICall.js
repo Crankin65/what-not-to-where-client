@@ -2,7 +2,7 @@ async function weatherAPICheck(city) {
 	if (city) {
 		const response = await fetch(`https://express-weather-server.onrender.com/weatherAPI/${city}`, {
 			method: 'GET',
-			mode: "cors"
+			mode: "no-cors"
 		});
 		let formattedData = await response.json();
 		// console.log(await formattedData)
