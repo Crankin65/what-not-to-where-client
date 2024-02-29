@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react'
 import Navbar from "../Components/Navbar"
 import WeatherSection from "../Components/WeatherSection";
 import pingAllWeatherAPIs from "@/API-Calls/pingAllWeatherAPIs";
+import pingDummyWeatherAPI from '../API-Calls/dummyFunctionsAndData/pingDummyWeatherAPI'
 import DetailedTable from "@/Components/DetailedTable";
 import '../app/globals.css'
 import Footer from "@/Components/Footer";
@@ -55,6 +56,7 @@ export default function Home(props) {
         throw(err);
       })}
   },[citySelection]);
+
   function updateOpenMeteoDetailedView(){
     if (openMeteoDetailedView === true) {
       setOpenMeteoDetailedView(false)

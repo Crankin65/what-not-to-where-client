@@ -26,7 +26,7 @@ export default function IconGenerator(props){
 		{
 			return (
 				<div className='flex'>
-					<div className='flex'>
+					<div className='flex px-2'>
 						<Image
 							src= {openUmbrella}
 							width={50}
@@ -35,7 +35,7 @@ export default function IconGenerator(props){
 						/>
 					</div>
 
-					<div className='flex'>
+					<div className='flex px-2'>
 						<Image
 							src= {raincoat}
 							width={50}
@@ -49,7 +49,7 @@ export default function IconGenerator(props){
 			return (
 				<div className='flex'>
 
-					<div className='flex'>
+					<div className='flex px-2'>
 						<Image
 							src= {mensShirt}
 							width={50}
@@ -58,7 +58,7 @@ export default function IconGenerator(props){
 						/>
 					</div>
 
-					<div className='flex'>
+					<div className='flex px-2'>
 						<Image
 							src= {womensShirt}
 							width={50}
@@ -72,7 +72,7 @@ export default function IconGenerator(props){
 			return (
 				<div className='flex'>
 
-					<div className='flex'>
+					<div className='flex px-2'>
 						<Image
 							src= {slipDress}
 							width={50}
@@ -81,7 +81,7 @@ export default function IconGenerator(props){
 						/>
 					</div>
 
-					<div className='flex'>
+					<div className='flex px-2'>
 						<Image
 							src= {polo}
 							width={50}
@@ -95,7 +95,7 @@ export default function IconGenerator(props){
 			return (
 				<div className='flex'>
 
-					<div className='flex'>
+					<div className='flex px-2'>
 						<Image
 							src= {jumper}
 							width={50}
@@ -104,7 +104,7 @@ export default function IconGenerator(props){
 						/>
 					</div>
 
-					<div className='flex'>
+					<div className='flex px-2'>
 						<Image
 							src= {pants}
 							width={50}
@@ -118,7 +118,7 @@ export default function IconGenerator(props){
 			return (
 				<div className='flex'>
 
-					<div className='flex'>
+					<div className='flex px-2'>
 						<Image
 							src= {jacket}
 							width={50}
@@ -127,7 +127,7 @@ export default function IconGenerator(props){
 						/>
 					</div>
 
-					<div className='flex'>
+					<div className='flex px-2'>
 						<Image
 							src= {winterBoots}
 							width={50}
