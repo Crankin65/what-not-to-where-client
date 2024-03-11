@@ -1,4 +1,4 @@
-# NextJS-Weather-Client
+# what-not-to-where-client
 I created this front-end to display data received from my Express-API-Server. This client pulls current, hourly, and weekly forecast data from three open weather APIs.
 
 A user is able to input a city to ping the server and see those different weather API data points in a consistent format. For more information, a user is able to view a detailed table by hour regarding tempeature, humidity, AQI, and more.
